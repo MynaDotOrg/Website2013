@@ -10,9 +10,21 @@ class EventsController extends BaseController{
 	public function Actions(){
 	
 		$currentUrl =$_SERVER['REQUEST_URI'];
-		if(false == $this->endswith($currentUrl,'/events/')){
+		$action = 'view';
+		if(isset($_REQUEST['a'])){
+			if(false == empty($_REQUEST['a']))
+			{
+				$action = $_REQUEST['a'];
+			}
+		}
+		
+		if(false == $this->endswith($currentUrl,'/events/') && $action == 'view'){
 			$eventId = $this->GetEventIDFromUrl($currentUrl);
-			$this->GetEventInfo($eventId );
+			$this->GetEventInfo($eventId);
+		}
+		else if(false == $this->endswith($currentUrl,'/events/') && $action == 'edit'){
+			$eventId = $this->GetEventIDFromUrl($currentUrl);
+			$this->EditEventInfo($eventId);
 		}
 		else{
 			//default
@@ -33,6 +45,13 @@ class EventsController extends BaseController{
 	
 	function GetEventInfo($eventId ){
 		$view = new EventInfoView();
+		$model = new EventInfoModel();
+		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
+		$view->GetView($model);
+	}
+	
+	function EditEventInfo($eventId){
+		$view = new EventsEditView();
 		$model = new EventInfoModel();
 		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
 		$view->GetView($model);

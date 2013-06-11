@@ -33,7 +33,9 @@ function MynaEventsPage(){
 	echo '<span>blahblahblah</span>';
 }
 
-
+function MynaPluginOnActivation(){
+	
+}
 
 
 ?>
