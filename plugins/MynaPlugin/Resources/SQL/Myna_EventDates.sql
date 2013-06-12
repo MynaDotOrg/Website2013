@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 11, 2013 at 02:09 AM
+-- Generation Time: Jun 12, 2013 at 02:30 AM
 -- Server version: 5.1.69
 -- PHP Version: 5.3.3
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `Myna_EventDates` (
   `EventDateID` int(11) NOT NULL AUTO_INCREMENT,
   `EventID` int(11) NOT NULL,
+  `DateName` varchar(1024) NOT NULL,
   `StartDateTime` datetime NOT NULL,
   `EndDateTime` datetime DEFAULT NULL,
   PRIMARY KEY (`EventDateID`),
