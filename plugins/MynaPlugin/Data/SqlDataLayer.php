@@ -52,6 +52,27 @@ class SqlDataLayer{
 		);
 		return $results;
 	}
+	
+	public function GetEventsDates($eventsIDs){
+		if(0< count($eventsIDs)){
+			$events ='';
+			foreach ($eventsIDs as $eventID){
+				$events = $events.$this->wpdbservice->prepare(',%d',$eventID); 
+			}
+			$events = substr($events, 1,strlen($events));
+			$results = $this->wpdbservice->get_results(
+					$this->wpdbservice->prepare(
+							'
+					SELECT *
+					FROM  Myna_EventDates
+					WHERE EventID in (%s)
+					'
+							,$events
+					)
+			);
+		}
+		return $results;
+	}
 }
 
 ?>

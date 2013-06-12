@@ -47,6 +47,7 @@ class EventsController extends BaseController{
 		$view = new EventInfoView();
 		$model = new EventInfoModel();
 		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
+		$model->EventDates = $this->sqldatalayer->GetEventDates($eventId);
 		$view->GetView($model);
 	}
 	

@@ -11,7 +11,20 @@ abstract class BaseController{
 		$this->sqldatalayer = new SqlDataLayer($wpdb);
 	}
 	
+	function populateWithPost ($obj = NULL)
+	{
+		if(is_object($obj)) {
 	
+		} else {
+			$obj = new StdClass ();
+		}
+	
+		foreach ($_POST as $var => $value) {
+			$obj->$var = trim($value);
+		}
+	
+		return $obj;
+	}
 }
 
 

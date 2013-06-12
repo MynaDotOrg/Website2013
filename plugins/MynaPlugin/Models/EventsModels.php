@@ -7,6 +7,7 @@ class EventListModel{
 
 class EventInfoModel{
 	public $Info;
+	public $EventDates;
 }
 
 ?>
