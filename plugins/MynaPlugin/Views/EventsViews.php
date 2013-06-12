@@ -1,5 +1,6 @@
 <?php
-
+$root = $_SERVER["DOCUMENT_ROOT"];
+require_once($root.'/wp-content/plugins/MynaPlugin/Views/BaseView.php');
 
 class EventListView{
 	public function GetView($model){
@@ -146,7 +147,7 @@ class EventInfoView{
 	}
 }
 
-class EventsEditView{
+class EventsEditView extends BaseView{
 	public function GetView($model){
 		?>
 			<style>
@@ -157,35 +158,44 @@ class EventsEditView{
 			<div id="primary" class="site-content">
 					<div id="content" role="main">
 						<div class="wrap">
-							<h2>
-							<?php echo $model->Info->Name; ?>
-							</h2>
-							<div class='editsection'>
-								<h3>Name:</h3>
-								<?php echo '<input type=\'text\' name=\'eventName\' value=\''.$model->Info->Name.'\' >'; ?>
-							</div>
-							<div class='editsection'>
-								<h3>Description:</h3>
-								<?php wp_editor( $model->Info->Description, 'descriptionEditor');?>
-							</div>
-							<div class='editsection'>
-								<h3>Location:</h3>
-								<input type='text' name='EventLocationAddress' style='width:200px'
-								<?php echo ' value=\''.$model->Info->LocationAddress.'\''; ?>
-								 /><br/>
-								<input type='text' name='EventLocationAddress2' style='width:200px'
-								<?php echo ' value=\''.$model->Info->LocationAddress2.'\' '; ?>
-								 /><br/>
-								<input type='text' name='EventLocationCity' style='width:150px'
-								<?php echo ' value=\''.$model->Info->LocationCity.'\' '; ?>
-								/><input type='text' name='EventLocationState' style='width:20px'
-								<?php echo ' value=\''.$model->Info->LocationState.'\' '; ?>
-								/><br/>
-								<input type='text' name='EventLocationZip' style='width:200px'
-								<?php echo ' value=\''.$model->Info->LocationZip.'\' '; ?>
-								/>
-							</div>
-							<input type="button" value="Save" /><input type="button" value="Cancel" />
+							<form method='post'
+								<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
+							>
+								<h2>
+								<?php echo $model->Info->Name; ?>
+								</h2>
+								<div 
+								<?php echo 'style=\'color:red;display:'.(true == $model->ErrorSavingInfo) ? 'none' : 'block'.';\'';?>
+								>
+									Error saving event information
+								</div>								
+								<div class='editsection'>
+									<h3>Name:</h3>
+									<?php echo '<input type=\'text\' name=\'eventName\' value=\''.$model->Info->Name.'\' >'; ?>
+								</div>
+								<div class='editsection'>
+									<h3>Description:</h3>
+									<?php wp_editor( $model->Info->Description, 'descriptionEditor', array('textarea_name'=>'descriptionEditor'));?>
+								</div>
+								<div class='editsection'>
+									<h3>Location:</h3>
+									<input type='text' name='EventLocationAddress' style='width:200px'
+									<?php echo ' value=\''.$model->Info->LocationAddress.'\''; ?>
+									 /><br/>
+									<input type='text' name='EventLocationAddress2' style='width:200px'
+									<?php echo ' value=\''.$model->Info->LocationAddress2.'\' '; ?>
+									 /><br/>
+									<input type='text' name='EventLocationCity' style='width:150px'
+									<?php echo ' value=\''.$model->Info->LocationCity.'\' '; ?>
+									/>
+									<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
+									<br/>
+									<input type='text' name='EventLocationZip' style='width:200px'
+									<?php echo ' value=\''.$model->Info->LocationZip.'\' '; ?>
+									/>
+								</div>
+								<input type="submit" value="Save" /><input type="button" value="Cancel" />
+							</form>
 						</div>
 					</div><!-- #content -->
 			</div><!-- #primary -->

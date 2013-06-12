@@ -4,6 +4,7 @@ $root = $_SERVER["DOCUMENT_ROOT"];
 require_once($root.'/wp-content/plugins/MynaPlugin/Controllers/BaseController.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Models/EventsModels.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Views/EventsViews.php');
+require_once($root.'/wp-content/plugins/MynaPlugin/Utility/Utility.php');
 
 class EventsController extends BaseController{
 
@@ -11,18 +12,15 @@ class EventsController extends BaseController{
 	
 		$currentUrl =$_SERVER['REQUEST_URI'];
 		$action = 'view';
-		if(isset($_REQUEST['a'])){
-			if(false == empty($_REQUEST['a']))
-			{
-				$action = $_REQUEST['a'];
-			}
+		if(isset($_REQUEST['a']) && false == empty($_REQUEST['a'])){
+			$action = $_REQUEST['a'];
 		}
 		
-		if(false == $this->endswith($currentUrl,'/events/') && $action == 'view'){
+		if(false == Utility::endswith($currentUrl,'/events/') && $action == 'view'){
 			$eventId = $this->GetEventIDFromUrl($currentUrl);
 			$this->GetEventInfo($eventId);
 		}
-		else if(false == $this->endswith($currentUrl,'/events/') && $action == 'edit'){
+		else if(false == Utility::endswith($currentUrl,'/events/') && $action == 'edit'){
 			$eventId = $this->GetEventIDFromUrl($currentUrl);
 			$this->EditEventInfo($eventId);
 		}
@@ -54,16 +52,21 @@ class EventsController extends BaseController{
 	function EditEventInfo($eventId){
 		$view = new EventsEditView();
 		$model = new EventInfoModel();
+		
+		if($_SERVER['REQUEST_METHOD'] === 'POST'){
+			$eventInfo = $this->populateWithPost();
+			$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);
+			if(true == $successfullySaved){
+				$this->redirect('/events/'.$eventId);
+			}else{
+				$model->ErrorSavingInfo = true;
+			}
+		}
+		
 		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
 		$view->GetView($model);
 	}
 	
-	function endswith($string, $test) {
-		$strlen = strlen($string);
-		$testlen = strlen($test);
-		if ($testlen > $strlen) return false;
-		return substr_compare($string, $test, -$testlen) === 0;
-	}
 	
 	function GetEventIDFromUrl($url){
 		preg_match_all('^\d+^',$url,$matches,PREG_PATTERN_ORDER);

@@ -38,6 +38,24 @@ class SqlDataLayer{
 			return $results;
 		} 
 	}
+	
+	public function SaveEventInfo($eventID, $eventInfo){
+		return $this->wpdbservice->update(
+			'Myna_Events',
+			array(
+			'Name' => $eventInfo->eventName,
+			'Description' => $eventInfo->descriptionEditor,
+			'LocationAddress' => $eventInfo->EventLocationAddress,
+			'LocationAddress2' => $eventInfo->EventLocationAddress2,
+			'LocationCity' => $eventInfo->EventLocationCity,
+			'LocationState' => $eventInfo->EventLocationState,
+			'LocationZip' => $eventInfo->EventLocationZip
+			),
+			array( 'EventID' => $eventID ),
+			null,
+			array( '%d' )
+		);
+	}
 
 	public function GetEventDates($eventID){
 		$results = $this->wpdbservice->get_results(

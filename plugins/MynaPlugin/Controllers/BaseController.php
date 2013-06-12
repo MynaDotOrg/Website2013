@@ -25,6 +25,11 @@ abstract class BaseController{
 	
 		return $obj;
 	}
+	
+	function redirect($newpage){
+		header("Location: ".$newpage);
+		die();
+	}
 }
 
 
