@@ -13,13 +13,13 @@ License: TDB
 */
 
 add_action('admin_menu', 'SetupMynaAdminPages');
-add_filter('template_include', 'AddMynaEventPages' );
+add_filter('template_include', 'AddMynaPages' );
 
-function SetupMynaEventPages(){
-	add_theme_page('Myna Events', 'Events and Camps', 'read', 'MynaEventUniqueID', 'MynaEventsPage');
+function SetupMynaAdminPages(){
+	add_menu_page('Myna Configuration', 'Myna Configuration', 'read', 'MynaUniqueID', 'MynaAdminPage');
 }
 
-function AddMynaEventPages($template ){
+function AddMynaPages($template ){
 	global $post; 
  
 	if($post->guid == 'http://108.166.98.208/?page_id=EventPage') 
@@ -37,7 +37,7 @@ function AddMynaEventPages($template ){
 	return $template;
 }
 
-function SetupMynaAdminPages(){
+function MynaAdminPage(){
 	echo '<span>Configure the Myna Plugin</span>';
 }
 
