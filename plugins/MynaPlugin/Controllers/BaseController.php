@@ -30,6 +30,13 @@ abstract class BaseController{
 		header("Location: ".$newpage);
 		die();
 	}
+	
+	function RequestIsPost(){
+		if($_SERVER['REQUEST_METHOD'] === 'POST'){
+			return true;
+		}
+		return false;
+	}
 }
 
 

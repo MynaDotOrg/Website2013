@@ -165,13 +165,18 @@ class EventsEditView extends BaseView{
 								<?php echo $model->Info->Name; ?>
 								</h2>
 								<div 
-								<?php echo 'style=\'color:red;display:'.(true == $model->ErrorSavingInfo) ? 'block' : 'none'.';\'';?>
+								<?php echo 'style=\'color:red;display:'.((true == $model->ErrorSavingInfo) ? 'block' : 'none').';\'';?>
 								>
 									Error saving event information
 								</div>								
 								<div class='editsection'>
 									<h3>Name:</h3>
 									<?php echo '<input type=\'text\' name=\'eventName\' value=\''.$model->Info->Name.'\' >'; ?>
+								</div>
+								<div>
+									<select>
+										
+									</select>
 								</div>
 								<div class='editsection'>
 									<h3>Description:</h3>

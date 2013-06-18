@@ -24,6 +24,9 @@ class EventsController extends BaseController{
 			$eventId = $this->GetEventIDFromUrl($currentUrl);
 			$this->EditEventInfo($eventId);
 		}
+		else if(false == Utility::endswith($currentURl, '/events/')&& $action == 'new'){
+			$this->NewEventInfo();
+		}
 		else{
 			//default
 			$this->GetEventsList();
@@ -53,7 +56,7 @@ class EventsController extends BaseController{
 		$view = new EventsEditView();
 		$model = new EventInfoModel();
 		
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){
+		if(true == $this->RequestIsPost()){
 			$eventInfo = $this->populateWithPost();
 			$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);
 			if(true == $successfullySaved){
@@ -67,6 +70,24 @@ class EventsController extends BaseController{
 		$view->GetView($model);
 	}
 	
+	function NewEventInfo(){
+		$model = new EventInfoModel();
+		$view = new EventsEditView();
+		if(true == $this->RequestIsPost()){
+			$eventInfo = $this->populateWithPost();
+			$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
+			if($successfullyCreated != (-1)){
+				//$this->redirect('/events/'.$successfullyCreated);
+				$this->redirect('/events/');
+			}else{
+				$model->ErrorSavingInfo = true;
+			}
+		}
+		else{
+			$model->Name = 'New Event';
+		}
+		$view->GetView($model);
+	}	
 	
 	function GetEventIDFromUrl($url){
 		preg_match_all('^\d+^',$url,$matches,PREG_PATTERN_ORDER);

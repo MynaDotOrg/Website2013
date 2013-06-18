@@ -57,6 +57,33 @@ class SqlDataLayer{
 		);
 	}
 
+	public function CreateEventInfo($eventInfo){
+		$result = $this->wpdbservice->insert(
+			'Myna_Events',
+			array(
+			'Name'=> $eventInfo->eventName,
+			'EventTypeID'=>1,		
+			'Description'=>$eventInfo->descriptionEditor,
+			'LocationAddress'=>$eventInfo->EventLocationAddress,
+			'LocationAddress2'=>$eventInfo->EventLocationAddress2,
+			'LocationCity'=>$eventInfo->EventLocationCity,
+			'LocationState'=>$eventInfo->EventLocationState,
+			'LocationZip'=>$eventInfo->EventLocationZip
+			),
+			array('%s', '%d','%s','%s','%s','%s','%s','%s')
+		);
+		
+		$resultID = $this->wpdbservice>insert_id;
+
+		if(false != $result){
+			
+			return $resultID;
+		}
+		else{
+			return -1;
+		}
+	}
+
 	public function GetEventDates($eventID){
 		$results = $this->wpdbservice->get_results(
 				$this->wpdbservice->prepare(
