@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Prometheus v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-15 16:38+0200\n"
+"PO-Revision-Date: 2012-03-12 14:21+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;gettext_noop\n"
+"X-Poedit-Basepath: D:\\work\\Projects\\_Themeforest\\_wordpress\\_Prometheus\\Prometheus\\main files\\Prometheus\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#@ agrg
+#: category.php:19
+msgid " %s"
+msgstr "%n"
+
+#@ agrg
+#: header.php:13
+msgid "Page %s"
+msgstr "Faqe %t"
+
+#@ agrg
+#: functions.php:583
+msgid "Footer menu"
+msgstr "Meny e poshtme"
+
+#@ agrg
+#: functions.php:583
+msgid "Main menu"
+msgstr "Meny Kryesore"
+
+#@ agrg
+#: archive.php:26
+msgid "Tag: "
+msgstr "Etiketë:"
+
+#@ agrg
+#: template-archive.php:215
+msgid "Archives by Month:"
+msgstr "Arkiva sipas Muajit:"
+
+#@ agrg
+#: template-archive.php:200
+msgid "Archives by Subject:"
+msgstr "Arkiva sipas temes:"
+
+#@ agrg
+#: template-archive.php:185
+msgid "Available Pages"
+msgstr "Faqet aktuale"
+
+#@ agrg
+#: archive.php:28
+msgid "Blog Archives: "
+msgstr "Arkiva e Blogeve:"
+
+#@ agrg
+#: archive.php:20
+msgid "Daily Archives: %s"
+msgstr "Arkivat ditore: %"
+
+#@ agrg
+#: forum.php:19
+msgid "Edit profile for User:"
+msgstr "Ndryshu profilin e User-it"
+
+#@ agrg
+#: forum.php:19
+msgid "Forums"
+msgstr "Forumet"
+
+#@ agrg
+#: archive.php:22
+msgid "Monthly Archives: %s"
+msgstr "Arkivat Mujore: %n"
+
+#@ agrg
+#: 404.php:81
+msgid "Ooops, you've encountered an error"
+msgstr "Ooops, sapo u krijua nje error"
+
+#@ agrg
+#: 404.php:63
+msgid "PAGE NOT FOUND"
+msgstr "Faqja nuk eshte gjetur"
+
+#@ agrg
+#: forum.php:19
+msgid "Profile for User:"
+msgstr "User-Profil:"
+
+#@ agrg
+#: search.php:21
+msgid "Search results for: "
+msgstr "Resultat e kerkuar per:"
+
+#@ agrg
+#: template-archive.php:104
+msgid "The 20 latest Blog Posts"
+msgstr "20 Blog-Artikujt e fundit"
+
+#@ agrg
+#: template-archive.php:144
+msgid "The 8 latest Portfolio Entries"
+msgstr "8 profilet e fundit"
+
+#@ agrg
+#: 404.php:82
+msgid "The page you were looking for doesn't exist."
+msgstr "Faqja te cilen e kerkoni nuk u gjet."
+
+#@ agrg
+#: archive.php:24
+msgid "Yearly Archives: %s"
+msgstr "Arkivat vjetore: %"
+
+#@ agrg
+#: search.php:85
+#: category.php:82
+#: archive.php:100
+#: template-blog-standard-v1-ls.php:139
+#: template-blog-standard-v1-rs.php:139
+#: single-right-sidebar.php:74
+#: single.php:89
+#: comments.php:11
+#: template-blog-standard-v2-rs.php:140
+#: single-left-sidebar.php:74
+#: template-blog-standard-v2-ls.php:141
+msgid "% Comments"
+msgstr "% Komente"
+
+#@ agrg
+#: search.php:84
+#: category.php:81
+#: archive.php:99
+#: single-right-sidebar.php:73
+#: single.php:88
+#: template-blog-standard-v2-rs.php:139
+#: single-left-sidebar.php:73
+#: template-blog-standard-v2-ls.php:140
+msgid "Author"
+msgstr "Autor"
+
+#@ agrg
+#: search.php:86
+#: category.php:83
+#: archive.php:101
+#: single-right-sidebar.php:75
+#: single.php:90
+#: template-blog-standard-v2-rs.php:141
+#: single-left-sidebar.php:75
+#: template-blog-standard-v2-ls.php:142
+msgid "Category"
+msgstr "Kategori"
+
+#@ agrg
+#: search.php:116
+msgid "Check your spelling."
+msgstr "Kontrolloni gabimet gramatikore"
+
+#@ agrg
+#: search.php:85
+#: category.php:82
+#: single-right-sidebar.php:74
+#: single.php:89
+#: archive.php:100
+#: template-blog-standard-v2-rs.php:140
+#: single-left-sidebar.php:74
+#: template-blog-standard-v2-ls.php:141
+msgid "Comments"
+msgstr "Komentet"
+
+#@ agrg
+#: template-comments-form.php:15
+msgid "Log out &raquo;"
+msgstr "çkyqu"
+
+#@ agrg
+#: template-comments-form.php:15
+msgid "Logged in as"
+msgstr "i kyçur si"
+
+#@ agrg
+#: search.php:85
+#: category.php:82
+#: archive.php:100
+#: template-blog-standard-v1-ls.php:139
+#: template-blog-standard-v1-rs.php:139
+#: single-right-sidebar.php:74
+#: single.php:89
+#: comments.php:11
+#: template-blog-standard-v2-rs.php:140
+#: single-left-sidebar.php:74
+#: template-blog-standard-v2-ls.php:141
+msgid "No comment"
+msgstr "S'ka komente"
+
+#@ agrg
+#: search.php:110
+msgid "Nothing Found"
+msgstr "Asgje nuk u gjet"
+
+#@ agrg
+#: search.php:85
+#: category.php:82
+#: archive.php:100
+#: template-blog-standard-v1-ls.php:139
+#: template-blog-standard-v1-rs.php:139
+#: single-right-sidebar.php:74
+#: single.php:89
+#: comments.php:11
+#: template-blog-standard-v2-rs.php:140
+#: single-left-sidebar.php:74
+#: template-blog-standard-v2-ls.php:141
+msgid "One comment"
+msgstr "Nje koment"
+
+#@ agrg
+#: template-archive.php:109
+msgid "Permanent Link:"
+msgstr "Linku Permanent:"
+
+#@ agrg
+#: search.php:83
+#: category.php:80
+#: single-right-sidebar.php:72
+#: single.php:87
+#: archive.php:98
+#: template-blog-standard-v2-rs.php:138
+#: single-left-sidebar.php:72
+#: template-blog-standard-v2-ls.php:139
+msgid "Posted on"
+msgstr "Postuar ne"
+
+#@ agrg
+#: template-portfolio-single.php:103
+#: template-portfolio-single.php:105
+#: template-portfolio-single.php:107
+#: template-portfolio-single.php:109
+#: template-portfolio-single.php:111
+#: template-portfolio-single.php:113
+#: single-right-sidebar.php:89
+#: single-right-sidebar.php:91
+#: single-right-sidebar.php:93
+#: single-right-sidebar.php:95
+#: single-right-sidebar.php:97
+#: single-right-sidebar.php:99
+#: single.php:104
+#: single.php:106
+#: single.php:108
+#: single.php:110
+#: single.php:112
+#: single.php:114
+#: single-left-sidebar.php:89
+#: single-left-sidebar.php:91
+#: single-left-sidebar.php:93
+#: single-left-sidebar.php:95
+#: single-left-sidebar.php:97
+#: single-left-sidebar.php:99
+msgid "Share this on"
+msgstr "Shperndaje"
+
+#@ agrg
+#: search.php:111
+msgid "Sorry, no posts matched your criteria. Try another search?"
+msgstr "Me fal, asgnje artikull nuk gjindet sipas kritereve tuaja, deshironi te kerkoni serish?"
+
+#@ agrg
+#: comments.php:3
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Ky artikull eshte i mbrojtur. Duhet te jepni fjalekalimin per te shikuar komentet."
+
+#@ agrg
+#: search.php:117
+msgid "Try a similar keyword, for example: tablet instead of laptop."
+msgstr "Provoni fjale te ngjashme si: tablet ne vend te laptop"
+
+#@ agrg
+#: search.php:118
+msgid "Try using more than one keyword."
+msgstr "Provoni te jepnie me teper se nje fjale."
+
+#@ agrg
+#: template-comments-form.php:7
+msgid "Wanna say something?"
+msgstr "Deshironi te thoni diçka?"
+
+#@ agrg
+#: search.php:114
+msgid "You might want to consider some of our suggestions to get better results:"
+msgstr "Ndoshta deshironi disa nga sugjerimet tona per te gjetur rezultate me te mira."
+
+#@ agrg
+#: template-comments-form.php:4
+msgid "You must be"
+msgstr "Ju duhet te"
+
+#@ agrg
+#: comments.php:11
+msgid "for"
+msgstr "per"
+
+#@ agrg
+#: template-comments-form.php:4
+msgid "logged in"
+msgstr "jeni te kyçur"
+
+#@ agrg
+#: template-comments-form.php:4
+msgid "to post a comment."
+msgstr "per te postuar nje koment."
+

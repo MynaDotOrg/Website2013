@@ -1,0 +1,675 @@
+/*------------------------------------*\
+   Orange Skin
+\*------------------------------------*/
+
+
+
+#content {
+	border-top: solid 3px #f46f36;
+}
+
+body {
+	background: #fff url(../images/patterns/roughcloth.png);
+}
+
+#page-title {
+	background: #EEE;
+}
+
+#page-title .container {
+	padding-top: 10px;
+	border-top: none;
+}
+
+#page-title .container .full {
+	margin-bottom: 10px;
+}
+
+#page-title .container .full h2 {
+	color: #9e9e9e;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+
+#main {
+	background-color: #484745;
+}
+
+#footer, #socket {
+	background-color: #2f2d2e;
+}
+
+.entry-title span {
+	background: #484745;
+}
+
+a {
+	color: #f46f36;
+}
+
+a:hover {
+	color: #e05e26;
+}
+
+a h1:hover, a h2:hover, a h3:hover, a h4:hover, a h5:hover, a h6:hover {
+	color: #e05e26;
+}
+
+.more a:hover {
+	background-color: #f46f36;
+}
+
+.news-link:hover>.news-headline {
+	color: #e05e26;
+}
+
+.flickr_images:hover {
+	background-color: #e05e26;
+}
+
+.main_menu .menu li.current_page_item > a, .main_menu .menu li a:hover {
+	background: #959758 url(../images/patterns/pattern-bg.png);
+	color: #fff;
+}
+
+.main_menu .menu ul.sub-menu {
+	border-top: none;
+	border: solid 1px #e1e1e1;
+}
+
+#top .main_menu li ul.sub-menu a:hover, #top .main_menu li ul.sub-menu li.current_page_item > a {
+	color: #e85657;
+}
+
+#top .main_menu .menu ul li.current_page_item > a {
+	background: none;
+}
+
+#top .main_menu .menu ul li:first-child > a {
+	background-image: url(../images/menu-up.png);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	margin-top: -9px;
+	padding-top: 17px !important;
+}
+
+.partner-arrow {
+	background: url(../images/partners-green.png) no-repeat top right;
+}
+
+.buy_button a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	border-image: initial;
+	background: #e05e26 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.buy_button a:hover {
+	color: #fff;
+	background: #f46f36 url(../images/patterns/pattern-bg.png);
+}
+
+
+.widget-title {
+	background: #2f2d2e;
+}
+
+.widget-content, .widget ul, .widget-quote, .textwidget, .tagcloud {
+	background: #959758 url(../images/patterns/pattern-bg.png);
+}
+
+.sidebar .widget .tagcloud a {
+	color: #f46f36;
+}
+
+.sidebar .widget .tagcloud a:hover {
+    color: #e05e26;
+}
+
+
+#search_block {
+	background: #2f2d2e;
+}
+
+#search_submit_block {
+	background: #959758 url(../images/patterns/pattern-bg.png);
+}
+
+.post-image img:hover {
+	border: 5px solid #e05e26;
+}
+
+.blog-image img:hover {
+	border: 5px solid #e05e26;
+}
+
+.comment-reply-link {
+	color: #f46f36;
+}
+
+.comment-reply-link:hover {
+	color: #e05e26;
+}
+
+.comment-body {
+	background-color: #2f2d2e;
+}
+
+.comment_input .input-textarea {
+	background-color: #2f2d2e;
+}
+
+.input-textarea, .bbp-form input, .bbp-form textarea, .bbp-form #bbp_stick_topic {
+	background-color: #2f2d2e;
+}
+
+.bbp-topics {
+	border-color: #666;
+}
+
+.contactform textarea {
+	background-color: #2f2d2e;
+}
+
+.input-textarea:focus {
+	border: 1px solid #e05e26;
+}
+
+.contactform textarea:focus {
+	border: 1px solid #e05e26;
+}
+
+.contactform textarea:focus, .bbp-form input:focus, .bbp-form textarea:focus, .input-textarea:focus {
+	border: 1px solid #e05e26;
+}
+
+.input-submit {
+	background: #959758 url(../images/patterns/pattern-bg.png);
+}
+
+.input-submit:hover {
+	background: #9ea061 url(../images/patterns/pattern-bg.png);
+}
+
+/* Buttons */
+.button {
+    background: #959758 url(../images/patterns/pattern-bg.png);
+}
+
+.button:hover {
+    background: #9ea061 url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_pink a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #DB3D93 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_pink a:hover {
+	background: #ed50a6 url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_pink a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #DB3D93 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_pink a:hover {
+	background: #ed50a6 url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_pink a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #DB3D93 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_pink a:hover {
+	background: #ed50a6 url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_blue a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #12A4B3 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_blue a:hover {
+	background: #25bece url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_blue a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #12A4B3 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_blue a:hover {
+	background: #25bece url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_blue a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #12A4B3 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_blue a:hover {
+	background: #25bece url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_orange a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	margin-bottom: 20px;
+	border-image: initial;
+	background: #e05e26 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_orange a:hover {
+	color: #fff;
+	background: #f46f36 url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_orange a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #e05e26 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_orange a:hover {
+	background: #f46f36 url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_orange a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #e05e26 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_orange a:hover {
+	background: #f46f36 url(../images/patterns/pattern-bg.png);
+}
+
+
+.big_button_green a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	margin-bottom: 20px;
+	border-image: initial;
+	background: #959758 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_green a:hover {
+	color: #fff;
+	background: #a1a366 url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_green a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #959758 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_green a:hover {
+	background: #a1a366 url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_green a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #959758 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_green a:hover {
+	background: #a1a366 url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_red a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #ec6364 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_red a:hover {
+	color: #fff;
+	background: #e85657 url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_red a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #ec6364 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_red a:hover {
+	background: #e85657 url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_red a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #ec6364 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_red a:hover {
+	background: #e85657 url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_purple a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #eee;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	margin-bottom: 20px;
+	border-image: initial;
+	background: #9f4d59 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_purple a:hover {
+	color: #eee;
+	background: #a95965 url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_purple a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #eee;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #9f4d59 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_purple a:hover {
+	background: #a95965 url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_purple a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #eee;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #9f4d59 url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_purple a:hover {
+	background: #a95965 url(../images/patterns/pattern-bg.png);
+}
+
+.big_button_brown a {
+	padding: 15px 20px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 28px;
+	line-height: 1em;
+	width: auto;
+	float: right;
+	margin-bottom: 20px;
+	border-image: initial;
+	background: #c3b47d url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.big_button_brown a:hover {
+	color: #fff;
+	background: #d3c48d url(../images/patterns/pattern-bg.png);
+}
+
+.medium_button_brown a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 20px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #c3b47d url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.medium_button_brown a:hover {
+	background: #d3c48d url(../images/patterns/pattern-bg.png);
+}
+
+.small_button_brown a {
+	padding: 10px 15px;
+	cursor: pointer;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1em;
+	width: auto;
+	float: left;
+	border-image: initial;
+	margin-bottom: 20px;
+	background: #c3b47d url(../images/patterns/pattern-bg.png);
+	text-align: center;
+}
+
+.small_button_brown a:hover {
+	background: #d3c48d url(../images/patterns/pattern-bg.png);
+}
+
+
+.small_button_brown a:hover {
+	background: #d3c48d url(../images/patterns/pattern-bg.png);
+}
+
+ul.tabs {
+	background: #2f2d2e;
+}
+
+.panes {
+	background: #636260;
+}
+
+h4.trigger.active {
+	color: #f46f36;
+}
+
+h4.trigger:hover, h4.trigger.active:hover {
+	color: #f46f36;
+}
+
+h4.trigger.active {
+	color: #f46f36;
+}
+
+h4.trigger {
+	background: #2f2d2e;
+}
+
+#price-table .pack li.even {
+	background-color: #2f2d2e;
+}
+
+#filters a.active_sort {
+	color: #f46f36;
+}
+
+#filters a:hover {
+	color: #f46f36;
+}
+
+/* Forum */
+#forum th, #forum td {
+	border-color: #666;
+}
+
+
+tr th.bbp-topic-title, tr th.bbp-topic-voice-count, tr th.bbp-topic-reply-count, tr th.bbp-topic-freshness, tr th.bbp-reply-author, tr th.bbp-reply-content, tr th.bbp-forum-info, tr th.bbp-forum-topic-count, tr th.bbp-forum-reply-count, tr th.bbp-forum-freshness, tr th.bbp-topic-action {
+	background-color: #2f2d2e;
+	color: #eee;
+}
+
+
+.bbp-form input, .bbp-form textarea, .bbp-form #bbp_stick_topic {
+	color: #eee;
+}
+
+.content fieldset.bbp-form, #container fieldset.bbp-form, #wrapper fieldset.bbp-form {
+	color: #C2C2C2;
+}
