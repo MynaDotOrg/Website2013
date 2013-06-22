@@ -2,13 +2,16 @@
 
 $root = $_SERVER["DOCUMENT_ROOT"];
 require_once($root.'/wp-content/plugins/MynaPlugin/Data/SqlDataLayer.php');
+require_once($root.'/wp-content/plugins/MynaPlugin/Data/UsersService.php');
 
 abstract class BaseController{
 	protected $sqldatalayer;
+	protected $usrService;
 	
 	function __construct(){
 		global $wpdb;
 		$this->sqldatalayer = new SqlDataLayer($wpdb);
+		$this->usrService = new UsersService($this->sqldatalayer);
 	}
 	
 	function populateWithPost ($obj = NULL)

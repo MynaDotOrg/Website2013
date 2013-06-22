@@ -4,6 +4,7 @@ $root = $_SERVER["DOCUMENT_ROOT"];
 require_once($root.'/wp-content/plugins/MynaPlugin/Controllers/BaseController.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Models/EventsModels.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Views/EventsViews.php');
+require_once($root.'/wp-content/plugins/MynaPlugin/Views/ErrorViews.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Utility/Utility.php');
 
 class EventsController extends BaseController{
@@ -53,20 +54,24 @@ class EventsController extends BaseController{
 	}
 	
 	function EditEventInfo($eventId){
-		$view = new EventsEditView();
-		$model = new EventInfoModel();
-		
-		if(true == $this->RequestIsPost()){
-			$eventInfo = $this->populateWithPost();
-			$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);
-			if(true == $successfullySaved){
-				$this->redirect('/events/'.$eventId);
-			}else{
-				$model->ErrorSavingInfo = true;
+		if(true == $this->usrService->UserIs(UserType::Administrator)){
+			$view = new EventsEditView();
+			$model = new EventInfoModel();
+			
+			if(true == $this->RequestIsPost()){
+				$eventInfo = $this->populateWithPost();
+				$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);
+				if(true == $successfullySaved){
+					$this->redirect('/events/'.$eventId);
+				}else{
+					$model->ErrorSavingInfo = true;
+				}
 			}
+			$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
 		}
-		
-		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
+		else{
+			$view = new PermissionsErrorView();
+		}
 		$view->GetView($model);
 	}
 	

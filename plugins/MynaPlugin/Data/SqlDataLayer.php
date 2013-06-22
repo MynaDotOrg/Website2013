@@ -118,6 +118,47 @@ class SqlDataLayer{
 		}
 		return $results;
 	}
+	
+	public function GetUsersTypes($userID){
+		$results = $this->wpdbservice->get_results(
+				$this->wpdbservice->prepare(
+						'
+				SELECT DISTINCT u2t.UserTypeID
+				FROM  Myna_UsersToTypes as u2t
+				WHERE u2t.UserID = %d
+				'
+						,$userID
+				)
+		);
+		return $results;
+	}
+	
+	public function AddUserType($userID, $typeID){
+		
+		$result = $this->wpdbservice->insert(
+				'Myna_UsersToTypes',
+				array(
+						'UserID'=> $userID,
+						'UserTypeID'=> $typeID->UserTypeID
+				),
+				array('%d', '%d')
+		);
+	}
+	
+	public function RemoveUserType($userID, $typeName){
+		
+	}
+	
+	public function AddMynaUser($userID){
+		$result = $this->wpdbservice->insert(
+				'Myna_Users',
+				array(
+						'UserID'=> $userID
+				),
+				array('%d')
+		);
+	}
+	
 }
 
 ?>
