@@ -8,14 +8,26 @@ class EventListView{
 				<style>
 					.listitem{
 						width:85%;
-						height:170px;
+						height:250px;
 						border: #cccccc solid 2px;
 						margin:30px;
 						padding:10px;
+						position:relative;
 					}
 					
-					.listitembox{
+					div.listitemColumn{
 						margin:10px;
+						float:left;
+					}
+					div.listitemRow{
+						margin:10px;
+						float:left;
+						width:99%;
+						height:auto
+					}
+					div.dockToBottom{
+						position: absolute; 
+						bottom: 0;
 					}
 					.listitemimage{
 						border:#cccccc solid 2px; 
@@ -41,37 +53,37 @@ class EventListView{
 										<h4>
 										<?php echo $LatestEvent->Name; ?>
 										</h4>
-										<span style='float:left;'>
-											<img src='../wp-content/plugins/MynaPlugin/images/camping_default.jpg' class='listitemimage'/>
-										</span>
-										<table style="width:350px; height:120px;float:right">
-											<tr>
-												<td>
-													<span style='vertical-align:top;'>													
-														<b>Location</b><br/>
-														<?php echo $LatestEvent->LocationAddress; ?><br/>
-														<?php echo $LatestEvent->LocationCity; ?>,
-														<?php echo $LatestEvent->LocationState; ?><br/>
-														<?php echo $LatestEvent->LocationZip; ?>
-													</span>
-												</td>
-												<td>
-													<span style='vertical-align:top;'>
-														<b>Dates</b>
-														<ol id="EventDatesList">
-															<?php
-															foreach ( $model->EventDates[$LatestEvent->EventID] as $eventdate ) 
-															{
-																$dt = new DateTime($eventdate->StartDateTime);
-																echo '<li>'.$eventdate->DateName.'<br/>'.$dt->format('F d, Y H:i A').'</li>';
-															}
-															?>
-														</ol>
-													</span>
-												</td>
-											</tr>
-										</table>
-										<div style='width:100%; margin-top:15px;'>
+										<div class="listitemRow">
+											<div class="listitemColumn">
+												<span style='float:left;'>
+													<img src='../wp-content/plugins/MynaPlugin/images/camping_default.jpg' class='listitemimage'/>
+												</span>
+											</div>
+											<div class="listitemColumn">
+												<span style='vertical-align:top;'>													
+													<b>Location</b><br/>
+													<?php echo $LatestEvent->LocationAddress; ?><br/>
+													<?php echo $LatestEvent->LocationCity; ?>,
+													<?php echo $LatestEvent->LocationState; ?><br/>
+													<?php echo $LatestEvent->LocationZip; ?>
+												</span>
+											</div>
+											<div class="listitemColumn">
+												<span style='vertical-align:top;'>
+													<b>Dates</b>
+													<ol id="EventDatesList">
+														<?php
+														foreach ( $model->EventDates[$LatestEvent->EventID] as $eventdate ) 
+														{
+															$dt = new DateTime($eventdate->StartDateTime);
+															echo '<li>'.$eventdate->DateName.'<br/>'.$dt->format('F d, Y H:i A').'</li>';
+														}
+														?>
+													</ol>
+												</span>
+											</div>
+										</div>
+										<div class="listitemRow dockToBottom">
 											<a style='width:10px;' 
 											<?php echo ' href=\'http://108.166.98.208/events/'.$LatestEvent->EventID.'\'' ;?>
 												><input type="button" value="More Info..." />
@@ -89,6 +101,15 @@ class EventListView{
 						</div>			
 					</div><!-- #content -->
 				</div><!-- #primary -->
+				<script id="listTemplate" type="text/x-jquery-tmpl">
+					<li>
+						<em>${}</em>
+					</li>
+				</script>
+				<script>
+					var viewmodel = {};
+					<?php echo "viewmodel.data=".json_encode($model).";" ;?>
+				</script>
 		<?php
 	}
 }

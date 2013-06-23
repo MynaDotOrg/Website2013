@@ -40,6 +40,15 @@ abstract class BaseController{
 		}
 		return false;
 	}
+	
+	function ShowErrorMessage($message = ""){
+		
+	}
+	
+	function ShowPermissionsError($message = ""){
+		$view = new PermissionsErrorView();
+		$view->GetView($model);
+	}
 }
 
 

@@ -54,7 +54,7 @@ class EventsController extends BaseController{
 	}
 	
 	function EditEventInfo($eventId){
-		if(true == $this->usrService->UserIs(UserType::Administrator)){
+		if(false == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
 			$view = new EventsEditView();
 			$model = new EventInfoModel();
 			
@@ -68,30 +68,35 @@ class EventsController extends BaseController{
 				}
 			}
 			$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
+			$view->GetView($model);
 		}
 		else{
-			$view = new PermissionsErrorView();
+			$this->ShowPermissionsError();
 		}
-		$view->GetView($model);
 	}
 	
 	function NewEventInfo(){
-		$model = new EventInfoModel();
-		$view = new EventsEditView();
-		if(true == $this->RequestIsPost()){
-			$eventInfo = $this->populateWithPost();
-			$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
-			if($successfullyCreated != (-1)){
-				//$this->redirect('/events/'.$successfullyCreated);
-				$this->redirect('/events/');
-			}else{
-				$model->ErrorSavingInfo = true;
+		if(false == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
+			$model = new EventInfoModel();
+			$view = new EventsEditView();
+			if(true == $this->RequestIsPost()){
+				$eventInfo = $this->populateWithPost();
+				$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
+				if($successfullyCreated != (-1)){
+					//$this->redirect('/events/'.$successfullyCreated);
+					$this->redirect('/events/');
+				}else{
+					$model->ErrorSavingInfo = true;
+				}
 			}
+			else{
+				$model->Name = 'New Event';
+			}
+			$view->GetView($model);
 		}
 		else{
-			$model->Name = 'New Event';
+			$this->ShowPermissionsError();
 		}
-		$view->GetView($model);
 	}	
 	
 	function GetEventIDFromUrl($url){

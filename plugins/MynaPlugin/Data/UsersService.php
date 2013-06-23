@@ -56,9 +56,40 @@ class UsersService{
 		}
 	}
 	
-	public function AddCurrentUserType(){
-		//$current_user = wp_get_current_user();
-		//$type = $this->sqldatalayer->GetUserType($current_user->ID);
+	public function UserIsAtLeast(){
+		if(true == is_user_logged_in()){
+			if(count($args)==0){
+				return true;
+			}
+			$args = array();
+			for($i = 0 ; $i < func_num_args(); $i++) {
+				$args[$i] = func_get_arg($i);
+			}
+			$types = $this->GetCurrentUserTypes();
+			
+			$userIsTypes = false;
+			foreach ($args as $arg){
+				$isType = false;
+				foreach ($types as $type){
+					if($arg == type){
+						$isType = true;
+					}
+				}
+				if(true == $isType){
+					$userIsTypes = true;
+					break;
+				}
+			}
+			return $userIsTypes;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public function AddUserTypeToCurrentUser(){
+		$current_user = wp_get_current_user();
+		$type = $this->sqldatalayer->GetUserType($current_user->ID);
 	}
 }
 
