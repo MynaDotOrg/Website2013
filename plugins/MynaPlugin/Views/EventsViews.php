@@ -35,80 +35,69 @@ class EventListView{
 						margin:3px;
 					}
 				</style>
-		
+				<script src="../wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>
 				<div id="primary" class="site-content">
 					<div id="content" role="main">
 		
 						<h2>Events</h2>
-						<div class="wrap">
-							
-							<?php   
-							try {
-								
-								foreach ( $model->LatestEvents as $LatestEvent ) 
-								{
-									//$LatestEvent->Name,$LatestEvent->Description
-									?>
-									<div class='listitem'>
-										<h4>
-										<?php echo $LatestEvent->Name; ?>
-										</h4>
-										<div class="listitemRow">
-											<div class="listitemColumn">
-												<span style='float:left;'>
-													<img src='../wp-content/plugins/MynaPlugin/images/camping_default.jpg' class='listitemimage'/>
-												</span>
-											</div>
-											<div class="listitemColumn">
-												<span style='vertical-align:top;'>													
-													<b>Location</b><br/>
-													<?php echo $LatestEvent->LocationAddress; ?><br/>
-													<?php echo $LatestEvent->LocationCity; ?>,
-													<?php echo $LatestEvent->LocationState; ?><br/>
-													<?php echo $LatestEvent->LocationZip; ?>
-												</span>
-											</div>
-											<div class="listitemColumn">
-												<span style='vertical-align:top;'>
-													<b>Dates</b>
-													<ol id="EventDatesList">
-														<?php
-														foreach ( $model->EventDates[$LatestEvent->EventID] as $eventdate ) 
-														{
-															$dt = new DateTime($eventdate->StartDateTime);
-															echo '<li>'.$eventdate->DateName.'<br/>'.$dt->format('F d, Y H:i A').'</li>';
-														}
-														?>
-													</ol>
-												</span>
-											</div>
-										</div>
-										<div class="listitemRow dockToBottom">
-											<a style='width:10px;' 
-											<?php echo ' href=\'http://108.166.98.208/events/'.$LatestEvent->EventID.'\'' ;?>
-												><input type="button" value="More Info..." />
-											</a>
-											<input type="button" value="Register" />
-										</div>
-									</div>
-									<?php
-								}
-							} catch (Exception $e) {
-								echo 'Caught exception: '.$e->getMessage().'\n';
-							}
-							?>
-							
+						<div class="wrap" id="EventList">
+						
 						</div>			
 					</div><!-- #content -->
 				</div><!-- #primary -->
-				<script id="listTemplate" type="text/x-jquery-tmpl">
+				<script id="EventItemTemplate" type="text/x-jquery-tmpl">
+					<div class='listitem'>
+						<h4>
+							${Name}
+						</h4>
+						<div class="listitemRow">
+							<div class="listitemColumn">
+								<span style='float:left;'>
+									<img src='../wp-content/plugins/MynaPlugin/images/camping_default.jpg' class='listitemimage'/>
+								</span>
+							</div>
+							<div class="listitemColumn">
+								<span style='vertical-align:top;'>													
+									<b>Location</b><br/>
+									${LocationAddress}<br/>
+									${LocationCity},
+									${LocationState}<br/>
+									${LocationZip}
+								</span>
+							</div>
+							<div class="listitemColumn">
+							{{if typeof EventDates != 'undefined'}}
+								<span style='vertical-align:top;'>
+									<b>Dates</b>
+									<ul id="EventDatesList">
+										{{tmpl(EventDates) "#DateListTemplate"}}
+									</ul>
+								</span>
+							{{/if}}
+							</div>
+						</div>
+						<div class="listitemRow dockToBottom">
+							<a style='width:10px;' 
+							<?php echo ' href=\'http://108.166.98.208/events/'.$LatestEvent->EventID.'\'' ;?>
+								><input type="button" value="More Info..." />
+							</a>
+							<input type="button" value="Register" />
+						</div>
+					</div>
+				</script>
+				<script id="DateListTemplate" type="text/x-jquery-tmpl">
 					<li>
-						<em>${}</em>
+						${StartDateTime}<br/>
+						${EndDateTime}
 					</li>
 				</script>
 				<script>
-					var viewmodel = {};
-					<?php echo "viewmodel.data=".json_encode($model).";" ;?>
+				var viewmodel = {};
+				<?php echo "viewmodel.data=".json_encode($model).";" ;?>
+				viewmodel.Init = function(){
+					jQuery("#EventItemTemplate").tmpl(viewmodel.data.LatestEvents).appendTo("#EventList");
+				};
+				viewmodel.Init();
 				</script>
 		<?php
 	}

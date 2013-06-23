@@ -41,6 +41,13 @@ class EventsController extends BaseController{
 		$model->LatestEvents = $this->sqldatalayer->GetLatestEvents();
 		foreach($model->LatestEvents as $event){
 			$model->EventDates[$event->EventID] = $this->sqldatalayer->GetEventDates($event->EventID);
+			foreach ( $model->EventDates[$event->EventID] as $eventdate )
+			{
+				$dt = new DateTime($eventdate->StartDateTime);
+				$eventdate->StartDateTime = $dt->format('F d, Y H:i A');
+				$dt = new DateTime($eventdate->EndDateTime);
+				$eventdate->EndDateTime = $dt->format('F d, Y H:i A');
+			}
 		}
 		$view->GetView($model);
 	}
