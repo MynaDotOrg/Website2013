@@ -5,12 +5,10 @@ require_once($root.'/wp-content/plugins/MynaPlugin/Models/BaseModel.php');
 
 class EventListModel extends BaseModel{
 	public $LatestEvents;
-	public $EventDates;
 }
 
 class EventInfoModel extends BaseModel{
 	public $Info;
-	public $EventDates;
 	public $ErrorSavingInfo = false;
 }
 

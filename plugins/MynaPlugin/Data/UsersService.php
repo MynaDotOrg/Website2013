@@ -71,7 +71,7 @@ class UsersService{
 			foreach ($args as $arg){
 				$isType = false;
 				foreach ($types as $type){
-					if($arg == type){
+					if($arg == $type->UserTypeID){
 						$isType = true;
 					}
 				}

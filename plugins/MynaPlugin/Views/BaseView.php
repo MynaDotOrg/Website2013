@@ -8,7 +8,7 @@ class BaseView{
 		<?php echo 'name=\''.$controlName.'\'' ;?>
 		>
 		<?php 
-		$states = array(
+		$states = array(	
 			'AL'=>'Alabama',
 			'AK'=>'Alaska',
 			'AZ'=>'Arizona',
@@ -60,6 +60,9 @@ class BaseView{
 			'WV'=>'West Virginia',
 			'WI'=>'Wisconsin',
 			'WY'=>'Wyoming');
+			
+			echo'<option value=\'\'>Select a State...</option>';
+			
 			foreach($states as $key=>$val){
 				if($selectedValue == $key){				
 					echo '<option value=\''.$key.'\' selected>'.$val.'</option>';

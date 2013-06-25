@@ -1,0 +1,30 @@
+div.dockToBottom{
+	position: absolute; 
+	bottom: 0;
+}
+
+.eventlistitem{
+	width:85%;
+	height:250px;
+	border: #cccccc solid 2px;
+	margin:30px;
+	padding:10px;
+	position:relative;
+}
+
+div.eventlistitemColumn{
+	margin:10px;
+	float:left;
+}
+div.eventlistitemRow{
+	margin:10px;
+	float:left;
+	width:99%;
+	height:auto
+}
+
+.eventlistitemimage{
+	border:#cccccc solid 2px; 
+	padding:4px;
+	margin:3px;
+}

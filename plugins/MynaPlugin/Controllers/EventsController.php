@@ -7,6 +7,13 @@ require_once($root.'/wp-content/plugins/MynaPlugin/Views/EventsViews.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Views/ErrorViews.php');
 require_once($root.'/wp-content/plugins/MynaPlugin/Utility/Utility.php');
 
+class EventType
+{
+	const Camp = 1;
+	const Seminar = 2;
+	const Fundraser = 3;
+}
+
 class EventsController extends BaseController{
 
 	public function Actions(){
@@ -40,13 +47,16 @@ class EventsController extends BaseController{
 		$model = new EventListModel();
 		$model->LatestEvents = $this->sqldatalayer->GetLatestEvents();
 		foreach($model->LatestEvents as $event){
-			$model->EventDates[$event->EventID] = $this->sqldatalayer->GetEventDates($event->EventID);
-			foreach ( $model->EventDates[$event->EventID] as $eventdate )
+			$eventDates = $this->sqldatalayer->GetEventDates($event->EventID);
+			$event->EventDates = array();
+			foreach ( $eventDates as $eventdate )
 			{
+				$edt = new StdClass();
 				$dt = new DateTime($eventdate->StartDateTime);
-				$eventdate->StartDateTime = $dt->format('F d, Y H:i A');
+				$edt->StartDateTime = $dt->format('F d, Y H:i A');
 				$dt = new DateTime($eventdate->EndDateTime);
-				$eventdate->EndDateTime = $dt->format('F d, Y H:i A');
+				$edt->EndDateTime = $dt->format('F d, Y H:i A');
+				$event->EventDates[] = $edt;
 			}
 		}
 		$view->GetView($model);
@@ -61,10 +71,10 @@ class EventsController extends BaseController{
 	}
 	
 	function EditEventInfo($eventId){
-		if(false == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
+		if(true == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
 			$view = new EventsEditView();
 			$model = new EventInfoModel();
-			
+			$this->SetEventTypes($model);
 			if(true == $this->RequestIsPost()){
 				$eventInfo = $this->populateWithPost();
 				$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);
@@ -83,9 +93,10 @@ class EventsController extends BaseController{
 	}
 	
 	function NewEventInfo(){
-		if(false == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
+		if(true == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
 			$model = new EventInfoModel();
 			$view = new EventsEditView();
+			$this->SetEventTypes($model);
 			if(true == $this->RequestIsPost()){
 				$eventInfo = $this->populateWithPost();
 				$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
@@ -113,6 +124,10 @@ class EventsController extends BaseController{
 	        return intval($matches[0][$arraylen-1]);
 		}
 		return -1;
+	}
+	
+	function SetEventTypes(&$model){
+		$model->ViewBag["EventTypes"] = array(EventType::Camp=>"Camp",EventType::Seminar=>"Seminar",EventType::Fundraser=>"Fundraser");
 	}
 
 }

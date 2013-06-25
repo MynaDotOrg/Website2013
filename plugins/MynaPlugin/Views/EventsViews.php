@@ -5,36 +5,7 @@ require_once($root.'/wp-content/plugins/MynaPlugin/Views/BaseView.php');
 class EventListView{
 	public function GetView($model){
 		?>
-				<style>
-					.listitem{
-						width:85%;
-						height:250px;
-						border: #cccccc solid 2px;
-						margin:30px;
-						padding:10px;
-						position:relative;
-					}
-					
-					div.listitemColumn{
-						margin:10px;
-						float:left;
-					}
-					div.listitemRow{
-						margin:10px;
-						float:left;
-						width:99%;
-						height:auto
-					}
-					div.dockToBottom{
-						position: absolute; 
-						bottom: 0;
-					}
-					.listitemimage{
-						border:#cccccc solid 2px; 
-						padding:4px;
-						margin:3px;
-					}
-				</style>
+				<link rel="stylesheet" type="text/css" href="../wp-content/plugins/MynaPlugin/css/MynaStyles.css">
 				<script src="../wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>
 				<div id="primary" class="site-content">
 					<div id="content" role="main">
@@ -46,17 +17,17 @@ class EventListView{
 					</div><!-- #content -->
 				</div><!-- #primary -->
 				<script id="EventItemTemplate" type="text/x-jquery-tmpl">
-					<div class='listitem'>
+					<div class='eventlistitem'>
 						<h4>
 							${Name}
 						</h4>
-						<div class="listitemRow">
-							<div class="listitemColumn">
+						<div class="eventlistitemRow">
+							<div class="eventlistitemColumn">
 								<span style='float:left;'>
 									<img src='../wp-content/plugins/MynaPlugin/images/camping_default.jpg' class='listitemimage'/>
 								</span>
 							</div>
-							<div class="listitemColumn">
+							<div class="eventlistitemColumn">
 								<span style='vertical-align:top;'>													
 									<b>Location</b><br/>
 									${LocationAddress}<br/>
@@ -65,7 +36,7 @@ class EventListView{
 									${LocationZip}
 								</span>
 							</div>
-							<div class="listitemColumn">
+							<div class="eventlistitemColumn">
 							{{if typeof EventDates != 'undefined'}}
 								<span style='vertical-align:top;'>
 									<b>Dates</b>
@@ -76,10 +47,9 @@ class EventListView{
 							{{/if}}
 							</div>
 						</div>
-						<div class="listitemRow dockToBottom">
-							<a style='width:10px;' 
-							<?php echo ' href=\'http://108.166.98.208/events/'.$LatestEvent->EventID.'\'' ;?>
-								><input type="button" value="More Info..." />
+						<div class="eventlistitemRow dockToBottom">
+							<a style='width:10px;' href='http://108.166.98.208/events/${EventID}'>
+								<input type="button" value="More Info..." />
 							</a>
 							<input type="button" value="Register" />
 						</div>
@@ -93,9 +63,9 @@ class EventListView{
 				</script>
 				<script>
 				var viewmodel = {};
-				<?php echo "viewmodel.data=".json_encode($model).";" ;?>
+				<?php echo "viewmodel.data=".json_encode($model->LatestEvents).";" ;?>
 				viewmodel.Init = function(){
-					jQuery("#EventItemTemplate").tmpl(viewmodel.data.LatestEvents).appendTo("#EventList");
+					jQuery("#EventItemTemplate").tmpl(viewmodel.data).appendTo("#EventList");
 				};
 				viewmodel.Init();
 				</script>
@@ -185,7 +155,10 @@ class EventsEditView extends BaseView{
 								</div>
 								<div>
 									<select>
-										
+										<?php //foreach($model->ViewBag["EventTypes"] as $eventype) {
+										//echo '<option/>';
+										//}
+										?>
 									</select>
 								</div>
 								<div class='editsection'>
