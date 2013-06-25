@@ -111,6 +111,7 @@ function register_my_menu() {
 		array(
 		'primary' =>__('Main menu'),
 		'secondary' =>__('Footer menu'),
+		'tertiary' =>__('Blog menu'),
 		)
 	);
 }
