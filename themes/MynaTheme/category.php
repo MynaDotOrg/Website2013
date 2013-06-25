@@ -13,6 +13,12 @@ get_header(); ?>
 <!-- this is index.php -->
 
 			<!-- Page Title Container -->
+			<div style="text-align: center;" id="blogmenu">
+<?php
+wp_nav_menu(array('theme_location' => 'tertiary', 'container' => 'blogmenu', 'menu_class' => 'bmenu'));
+
+?>
+			</div>
 			<div class="container_wrap" id="page-title">
 				<div class="container">
 					<div class="full">
