@@ -178,7 +178,7 @@ class EventsEditView extends BaseView{
 				<h3>Location:</h3>
 				<input type='text' name='EventLocationAddress' style='width:200px' value='${LocationAddress}'/><br/>
 				<input type='text' name='EventLocationAddress2' style='width:200px' value='${LocationAddress2}'/><br/>
-				<input type='text' name='EventLocationCity' style='width:150px' value='$LocationCity'/>
+				<input type='text' name='EventLocationCity' style='width:150px' value='${LocationCity}'/>
 				<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
 				<br/>
 				<input type='text' name='EventLocationZip' style='width:200px' value='${LocationZip}'/>
