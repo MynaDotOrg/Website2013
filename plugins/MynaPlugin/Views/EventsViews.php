@@ -135,58 +135,65 @@ class EventsEditView extends BaseView{
 					margin:25px;
 				}
 			</style>
+			<?php echo '<script src="http://'.$_SERVER['HTTP_HOST'].'/wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>'; ?>
 			<div id="primary" class="site-content">
 					<div id="content" role="main">
 						<div class="wrap">
 							<form method='post'
 								<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
 							>
-								<h2>
-								<?php echo $model->Info->Name; ?>
-								</h2>
-								<div 
-								<?php echo 'style=\'color:red;display:'.((true == $model->ErrorSavingInfo) ? 'block' : 'none').';\'';?>
-								>
-									Error saving event information
-								</div>								
-								<div class='editsection'>
-									<h3>Name:</h3>
-									<?php echo '<input type=\'text\' name=\'eventName\' value=\''.$model->Info->Name.'\' >'; ?>
-								</div>
-								<div>
-									<select>
-										<?php //foreach($model->ViewBag["EventTypes"] as $eventype) {
-										//echo '<option/>';
-										//}
-										?>
-									</select>
-								</div>
-								<div class='editsection'>
-									<h3>Description:</h3>
-									<?php wp_editor( $model->Info->Description, 'descriptionEditor', array('textarea_name'=>'descriptionEditor'));?>
-								</div>
-								<div class='editsection'>
-									<h3>Location:</h3>
-									<input type='text' name='EventLocationAddress' style='width:200px'
-									<?php echo ' value=\''.$model->Info->LocationAddress.'\''; ?>
-									 /><br/>
-									<input type='text' name='EventLocationAddress2' style='width:200px'
-									<?php echo ' value=\''.$model->Info->LocationAddress2.'\' '; ?>
-									 /><br/>
-									<input type='text' name='EventLocationCity' style='width:150px'
-									<?php echo ' value=\''.$model->Info->LocationCity.'\' '; ?>
-									/>
-									<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
-									<br/>
-									<input type='text' name='EventLocationZip' style='width:200px'
-									<?php echo ' value=\''.$model->Info->LocationZip.'\' '; ?>
-									/>
-								</div>
+								<div id="EventInfo"></div>
+								
 								<input type="submit" value="Save" /><input type="button" value="Cancel" />
 							</form>
 						</div>
 					</div><!-- #content -->
 			</div><!-- #primary -->
+			<script id="EditEventInfoTemplate"  type="text/x-jquery-tmpl">
+			<h2>${Name}</h2>
+			<div  
+			<?php echo 'style=\'color:red;display:'.((true == $model->ViewBag["ErrorSavingInfo"]) ? 'block' : 'none').';\'';?>
+			>
+				Error saving event information
+			</div>								
+			<div class='editsection'>
+				<h3>Name:</h3>
+				<input type='text' name='eventName' value='${Name}' >
+			</div>
+			<div>
+				<select>
+				</select>
+			</div>
+			<div class='editsection'>
+				<h3>Description:</h3>
+				<?php wp_editor( $model->Info->Description, 'descriptionEditor', array('textarea_name'=>'descriptionEditor'));?>
+			</div>
+			<div class='editsection'>
+				<h3>Date</h3>
+				<div class='EventDates'>
+					<input type="text" id="EventDatePicker" name="EventDates" value='${EventDate}' />
+				</div>
+			</div>
+			<div class='editsection'>
+				<h3>Location:</h3>
+				<input type='text' name='EventLocationAddress' style='width:200px' value='${LocationAddress}'/><br/>
+				<input type='text' name='EventLocationAddress2' style='width:200px' value='${LocationAddress2}'/><br/>
+				<input type='text' name='EventLocationCity' style='width:150px' value='$LocationCity'/>
+				<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
+				<br/>
+				<input type='text' name='EventLocationZip' style='width:200px' value='${LocationZip}'/>
+			</div>
+			</script>
+			<script>
+				var viewmodel = {};
+				<?php echo "viewmodel.data=".json_encode($model->Info).";" ;?>
+				viewmodel.Init = function(){
+					jQuery("#EditEventInfoTemplate").tmpl(viewmodel.data).appendTo("#EventInfo");
+					//bind states dropdown value
+					//bind description editor value
+				};
+				viewmodel.Init();
+			</script>
 		<?php
 	}
 }

@@ -81,7 +81,7 @@ class EventsController extends BaseController{
 				if(true == $successfullySaved){
 					$this->redirect('/events/'.$eventId);
 				}else{
-					$model->ErrorSavingInfo = true;
+					$model->ViewBag["ErrorSavingInfo"] = true;
 				}
 			}
 			$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
@@ -104,7 +104,7 @@ class EventsController extends BaseController{
 					//$this->redirect('/events/'.$successfullyCreated);
 					$this->redirect('/events/');
 				}else{
-					$model->ErrorSavingInfo = true;
+					$model->ViewBag["ErrorSavingInfo"] = true;
 				}
 			}
 			else{

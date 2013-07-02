@@ -9,7 +9,6 @@ class EventListModel extends BaseModel{
 
 class EventInfoModel extends BaseModel{
 	public $Info;
-	public $ErrorSavingInfo = false;
 }
 
 ?>
