@@ -2,10 +2,10 @@
 $root = $_SERVER["DOCUMENT_ROOT"];
 require_once($root.'/wp-content/plugins/MynaPlugin/Views/BaseView.php');
 
-class EventListView{
+class EventListView extends BaseView{
 	public function GetView($model){
 		?>
-				<link rel="stylesheet" type="text/css" href="../wp-content/plugins/MynaPlugin/css/MynaStyles.css">
+				
 				<script src="../wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>
 				<div id="primary" class="site-content">
 					<div id="content" role="main">
@@ -73,7 +73,7 @@ class EventListView{
 	}
 }
 
-class EventInfoView{
+class EventInfoView extends BaseView{
 	public function GetView($model){
 		?>
 			<style>
@@ -135,7 +135,10 @@ class EventsEditView extends BaseView{
 					margin:25px;
 				}
 			</style>
-			<?php echo '<script src="http://'.$_SERVER['HTTP_HOST'].'/wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>'; ?>
+			<script>
+				$ = jQuery;
+			</script>
+
 			<div id="primary" class="site-content">
 					<div id="content" role="main">
 						<div class="wrap">
@@ -152,7 +155,7 @@ class EventsEditView extends BaseView{
 			<script id="EditEventInfoTemplate"  type="text/x-jquery-tmpl">
 			<h2>${Name}</h2>
 			<div  
-			<?php echo 'style=\'color:red;display:'.((true == $model->ViewBag["ErrorSavingInfo"]) ? 'block' : 'none').';\'';?>
+			<?php echo 'style=\'color:red;display:'.((true == $this->ViewBag["ErrorSavingInfo"]) ? 'block' : 'none').';\'';?>
 			>
 				Error saving event information
 			</div>								
@@ -160,7 +163,7 @@ class EventsEditView extends BaseView{
 				<h3>Name:</h3>
 				<input type='text' name='eventName' value='${Name}' >
 			</div>
-			<div>
+			<div class='editsection'>
 				<select>
 				</select>
 			</div>
@@ -171,7 +174,7 @@ class EventsEditView extends BaseView{
 			<div class='editsection'>
 				<h3>Date</h3>
 				<div class='EventDates'>
-					<input type="text" id="EventDatePicker" name="EventDates" value='${EventDate}' />
+					<input type="text" class="datePickerClass" id="EventDatePicker" name="EventDates" value='${EventDate}' />
 				</div>
 			</div>
 			<div class='editsection'>
@@ -191,8 +194,12 @@ class EventsEditView extends BaseView{
 					jQuery("#EditEventInfoTemplate").tmpl(viewmodel.data).appendTo("#EventInfo");
 					//bind states dropdown value
 					//bind description editor value
+					//$(".datePickerClass").datepicker();
 				};
-				viewmodel.Init();
+				$(document).ready(function() {
+					viewmodel.Init();
+				});
+				
 			</script>
 		<?php
 	}

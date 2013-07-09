@@ -159,6 +159,46 @@ class SqlDataLayer{
 		);
 	}
 	
+	
+	public function GetRegistrationFormEmbedCode($registrationId){
+		$results = $this->wpdbservice->get_results(
+				$this->wpdbservice->prepare(
+						'
+						SELECT FormEmbedCode
+						FROM Myna_Registrations as r
+						WHERE r.RegistrationID = %d
+						'
+						,$registrationId
+				)
+		);
+		if(0 < count($results)){
+			return $results[0];
+		}
+		else{
+			return $results;
+		}
+	}
+	
+	public function GetRegistrationEventInfo($registrationId){
+		$results = $this->wpdbservice->get_results(
+				$this->wpdbservice->prepare(
+						'
+						SELECT e.*
+						FROM Myna_Events AS e
+						INNER JOIN Myna_Registrations AS r ON r.EventID = e.EventID
+						WHERE r.RegistrationID = %d
+						'
+						,$registrationId
+				)
+		);
+		if(0 < count($results)){
+			return $results[0];
+		}
+		else{
+			return $results;
+		} 
+	}
+	
 }
 
 ?>

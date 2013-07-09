@@ -25,11 +25,11 @@ class EventsController extends BaseController{
 		}
 		
 		if(false == Utility::endswith($currentUrl,'/events/') && $action == 'view'){
-			$eventId = $this->GetEventIDFromUrl($currentUrl);
+			$eventId = $this->GetIDFromUrl($currentUrl);
 			$this->GetEventInfo($eventId);
 		}
 		else if(false == Utility::endswith($currentUrl,'/events/') && $action == 'edit'){
-			$eventId = $this->GetEventIDFromUrl($currentUrl);
+			$eventId = $this->GetIDFromUrl($currentUrl);
 			$this->EditEventInfo($eventId);
 		}
 		else if(false == Utility::endswith($currentURl, '/events/')&& $action == 'new'){
@@ -81,7 +81,7 @@ class EventsController extends BaseController{
 				if(true == $successfullySaved){
 					$this->redirect('/events/'.$eventId);
 				}else{
-					$model->ViewBag["ErrorSavingInfo"] = true;
+					$view->ViewBag["ErrorSavingInfo"] = true;
 				}
 			}
 			$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
@@ -96,7 +96,7 @@ class EventsController extends BaseController{
 		if(true == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
 			$model = new EventInfoModel();
 			$view = new EventsEditView();
-			$this->SetEventTypes($model);
+			$this->SetEventTypes($view);
 			if(true == $this->RequestIsPost()){
 				$eventInfo = $this->populateWithPost();
 				$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
@@ -104,7 +104,7 @@ class EventsController extends BaseController{
 					//$this->redirect('/events/'.$successfullyCreated);
 					$this->redirect('/events/');
 				}else{
-					$model->ViewBag["ErrorSavingInfo"] = true;
+					$view->ViewBag["ErrorSavingInfo"] = true;
 				}
 			}
 			else{
@@ -117,7 +117,7 @@ class EventsController extends BaseController{
 		}
 	}	
 	
-	function GetEventIDFromUrl($url){
+	function GetIDFromUrl($url){
 		preg_match_all('^\d+^',$url,$matches,PREG_PATTERN_ORDER);
 		$arraylen = count($matches[0]);
 		if(0 < $arraylen){
@@ -126,8 +126,8 @@ class EventsController extends BaseController{
 		return -1;
 	}
 	
-	function SetEventTypes(&$model){
-		$model->ViewBag["EventTypes"] = array(EventType::Camp=>"Camp",EventType::Seminar=>"Seminar",EventType::Fundraser=>"Fundraser");
+	function SetEventTypes(&$view){
+		$view->ViewBag["EventTypes"] = array(EventType::Camp=>"Camp",EventType::Seminar=>"Seminar",EventType::Fundraser=>"Fundraser");
 	}
 
 }

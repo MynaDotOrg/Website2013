@@ -13,7 +13,7 @@ License: TDB
 */
 
 $root = $_SERVER["DOCUMENT_ROOT"];
-require_once($root.'/wp-content/plugins/MynaPlugin/Utility/Utility.php');
+require_once($root.'/wp-content/plugins/MynaPlugin/Services/Router.php');
 
 add_action('admin_menu', 'SetupMynaAdminPages');
 add_filter('template_include', 'AddMynaPages' );
@@ -25,17 +25,13 @@ function SetupMynaAdminPages(){
 function AddMynaPages($template ){
 	global $post; 
  
-	if(true == Utility::endswith($post->guid,'/?page_id=EventPage')) 
+	if(true == Router::UseMynaTemplate($post)) 
 	{
-		return get_stylesheet_directory().'/Events.php';
+		return get_stylesheet_directory().'/MynaTemplate.php';
 	}
-	else if(true == Utility::endswith($post->guid,'/?page_id=AjaxPage'))
+	else if(true == Router::UseMynaTemplate($post))
 	{
-		return get_stylesheet_directory().'/Ajax.php';
-	}
-	else if(Utility::endswith($post->guid,'/?page_id=MediaPage'))
-	{
-		return get_stylesheet_directory().'/Media.php';
+		return get_stylesheet_directory().'/MynaAjaxTemplate.php';
 	}
 	return $template;
 }

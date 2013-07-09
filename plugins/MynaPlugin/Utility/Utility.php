@@ -8,6 +8,13 @@ class Utility{
 		if ($testlen > $strlen) return false;
 		return substr_compare($string, $test, -$testlen) === 0;
 	}
+	
+	public static function contains($string){
+		if (strpos($string, '.') !== FALSE)
+			return true;
+		else
+			return false;
+	}
 }
 
 ?>

@@ -1,6 +1,10 @@
 <?php
 
 class BaseView{
+	function __construct(){
+		$ViewBag= array();
+	}
+	public $ViewBag;
 	
 	public function GetStatesDropdown($controlName, $selectedValue){
 		?>

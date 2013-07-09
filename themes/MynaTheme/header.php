@@ -44,9 +44,14 @@ if ( $paged >= 2 || $page >= 2 )
 
 <!-- jquery -->
 <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/jquery.js'></script>
-
+<script type="text/javascript" language="javascript">
+	$ = jQuery;
+</script>
 <?php wp_head(); ?>
-
+<?php echo '<link href="http://'.$_SERVER['HTTP_HOST'].'/wp-content/plugins/MynaPlugin/css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">' ?>
+<?php echo '<script src="http://'.$_SERVER['HTTP_HOST'].'/wp-content/plugins/MynaPlugin/js/jquery.tmpl.min.js"></script>'; ?>
+<?php echo '<script src="http://'.$_SERVER['HTTP_HOST'].'/wp-content/plugins/MynaPlugin/js/jquery-ui-1.10.3.custom.min.js"></script>'; ?>
+<link rel="stylesheet" type="text/css" href="http://<?php echo $_SERVER['HTTP_HOST'];?>/wp-content/plugins/MynaPlugin/css/MynaStyles.css">
 <!-- fancy box -->
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
