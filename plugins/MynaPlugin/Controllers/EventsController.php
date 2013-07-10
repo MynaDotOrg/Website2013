@@ -74,7 +74,7 @@ class EventsController extends BaseController{
 		if(true == $this->usrService->UserIsAtLeast(UserType::Advisor,UserType::Officer,UserType::Administrator)){
 			$view = new EventsEditView();
 			$model = new EventInfoModel();
-			$this->SetEventTypes($model);
+			$this->SetEventTypes($view);
 			if(true == $this->RequestIsPost()){
 				$eventInfo = $this->populateWithPost();
 				$successfullySaved = $this->sqldatalayer->SaveEventInfo($eventId, $eventInfo);

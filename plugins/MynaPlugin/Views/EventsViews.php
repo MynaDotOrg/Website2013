@@ -135,22 +135,18 @@ class EventsEditView extends BaseView{
 					margin:25px;
 				}
 			</style>
-			<script>
-				$ = jQuery;
-			</script>
-
 			<div id="primary" class="site-content">
-					<div id="content" role="main">
-						<div class="wrap">
-							<form method='post'
-								<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
-							>
-								<div id="EventInfo"></div>
-								
-								<input type="submit" value="Save" /><input type="button" value="Cancel" />
-							</form>
-						</div>
-					</div><!-- #content -->
+				<div id="content" role="main">
+					<div class="wrap">
+						<form method='post'
+							<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
+						>
+							<div id="EventInfo"></div>
+							
+							<input type="submit" value="Save" /><input type="button" value="Cancel" />
+						</form>
+					</div>
+				</div><!-- #content -->
 			</div><!-- #primary -->
 			<script id="EditEventInfoTemplate"  type="text/x-jquery-tmpl">
 			<h2>${Name}</h2>
@@ -164,12 +160,17 @@ class EventsEditView extends BaseView{
 				<input type='text' name='eventName' value='${Name}' >
 			</div>
 			<div class='editsection'>
-				<select>
+				<select id="eventTypeDropDown">
+					<?php 
+						foreach($this->ViewBag["EventTypes"] as $eventTypeId => $eventTypeName){
+							echo '<option value="'.$eventTypeId.'" >'.$eventTypeName.'</option>';
+						}
+					?>
 				</select>
 			</div>
 			<div class='editsection'>
 				<h3>Description:</h3>
-				<?php wp_editor( $model->Info->Description, 'descriptionEditor', array('textarea_name'=>'descriptionEditor'));?>
+				
 			</div>
 			<div class='editsection'>
 				<h3>Date</h3>
@@ -194,11 +195,10 @@ class EventsEditView extends BaseView{
 					jQuery("#EditEventInfoTemplate").tmpl(viewmodel.data).appendTo("#EventInfo");
 					//bind states dropdown value
 					//bind description editor value
-					//$(".datePickerClass").datepicker();
+					jQuery("#eventTypeDropDown").val('<?php echo $model->Info->EventTypeID;?>');
+					jQuery(".datePickerClass").datepicker();
 				};
-				$(document).ready(function() {
-					viewmodel.Init();
-				});
+				viewmodel.Init();
 				
 			</script>
 		<?php

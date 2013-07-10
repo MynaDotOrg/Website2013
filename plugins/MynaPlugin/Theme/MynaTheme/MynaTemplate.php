@@ -5,7 +5,7 @@
 */
 
 $root = $_SERVER["DOCUMENT_ROOT"];
-require_once($root.'/wp-content/plugins/MynaPlugin/Controllers/EventsController.php');
+require_once($root.'/wp-content/plugins/MynaPlugin/Services/Router.php');
 
 global $post;
 $controller = Router::GetController($post);
