@@ -141,7 +141,54 @@ class EventsEditView extends BaseView{
 						<form method='post'
 							<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
 						>
-							<div id="EventInfo"></div>
+							<div id="EventInfo">
+								<h2><?php echo $model->Info->Name; ?></h2>
+								<div  
+								<?php echo 'style=\'color:red;display:'.((true == $this->ViewBag["ErrorSavingInfo"]) ? 'block' : 'none').';\'';?>
+								>
+									Error saving event information
+								</div>								
+								<div class='editsection'>
+									<h3>Name:</h3>
+									<input type='text' name='eventName' value='<?php echo $model->Info->Name; ?>' >
+								</div>
+								<div class='editsection'>
+									<select id="eventTypeDropDown">
+										<?php 
+											foreach($this->ViewBag["EventTypes"] as $eventTypeId => $eventTypeName){
+												echo '<option value="'.$eventTypeId.'" >'.$eventTypeName.'</option>';
+											}
+										?>
+									</select>
+								</div>
+								<div class='editsection'>
+									<h3>Description:</h3>
+									<?php wp_editor( $model->Info->Description, 'descriptionEditor', array('textarea_name'=>'descriptionEditor')); ?>
+								</div>
+								<div class='editsection' style="height:50px; width:95%;">
+									<div style="float:left;">
+										<h3>Date</h3>
+										<div class='EventDates'>
+											<input type="text" class="datePickerClass" id="EventDatePicker" name="EventDates" value='<?php echo $model->Info->EventDate; ?>' />
+										</div>
+									</div>
+									<div style="float:left; padding-left:30px;">
+										<h3>Time</h3>
+										<div class='EventDates'>
+											<?php $this->GetTimePicker("EventDatePickerTime", $model->Info->Time);?>
+										</div>
+									</div>
+								</div>
+								<div class='editsection'>
+									<h3>Location:</h3>
+									<input type='text' name='EventLocationAddress' style='width:200px' value='<?php echo $model->Info->LocationAddress; ?>'/><br/>
+									<input type='text' name='EventLocationAddress2' style='width:200px' value='<?php echo $model->Info->LocationAddress2; ?>'/><br/>
+									<input type='text' name='EventLocationCity' style='width:150px' value='<?php echo $model->Info->LocationCity; ?>'/>
+									<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
+									<br/>
+									<input type='text' name='EventLocationZip' style='width:200px' value='<?php echo $model->Info->LocationZip; ?>'/>
+								</div>
+							</div>
 							
 							<input type="submit" value="Save" /><input type="button" value="Cancel" />
 						</form>
@@ -149,50 +196,12 @@ class EventsEditView extends BaseView{
 				</div><!-- #content -->
 			</div><!-- #primary -->
 			<script id="EditEventInfoTemplate"  type="text/x-jquery-tmpl">
-			<h2>${Name}</h2>
-			<div  
-			<?php echo 'style=\'color:red;display:'.((true == $this->ViewBag["ErrorSavingInfo"]) ? 'block' : 'none').';\'';?>
-			>
-				Error saving event information
-			</div>								
-			<div class='editsection'>
-				<h3>Name:</h3>
-				<input type='text' name='eventName' value='${Name}' >
-			</div>
-			<div class='editsection'>
-				<select id="eventTypeDropDown">
-					<?php 
-						foreach($this->ViewBag["EventTypes"] as $eventTypeId => $eventTypeName){
-							echo '<option value="'.$eventTypeId.'" >'.$eventTypeName.'</option>';
-						}
-					?>
-				</select>
-			</div>
-			<div class='editsection'>
-				<h3>Description:</h3>
-				
-			</div>
-			<div class='editsection'>
-				<h3>Date</h3>
-				<div class='EventDates'>
-					<input type="text" class="datePickerClass" id="EventDatePicker" name="EventDates" value='${EventDate}' />
-				</div>
-			</div>
-			<div class='editsection'>
-				<h3>Location:</h3>
-				<input type='text' name='EventLocationAddress' style='width:200px' value='${LocationAddress}'/><br/>
-				<input type='text' name='EventLocationAddress2' style='width:200px' value='${LocationAddress2}'/><br/>
-				<input type='text' name='EventLocationCity' style='width:150px' value='${LocationCity}'/>
-				<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
-				<br/>
-				<input type='text' name='EventLocationZip' style='width:200px' value='${LocationZip}'/>
-			</div>
+			
 			</script>
 			<script>
 				var viewmodel = {};
 				<?php echo "viewmodel.data=".json_encode($model->Info).";" ;?>
 				viewmodel.Init = function(){
-					jQuery("#EditEventInfoTemplate").tmpl(viewmodel.data).appendTo("#EventInfo");
 					//bind states dropdown value
 					//bind description editor value
 					jQuery("#eventTypeDropDown").val('<?php echo $model->Info->EventTypeID;?>');
@@ -202,6 +211,7 @@ class EventsEditView extends BaseView{
 				
 			</script>
 		<?php
+		
 	}
 }
 
