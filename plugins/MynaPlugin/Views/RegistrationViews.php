@@ -66,7 +66,7 @@ class RegistrationFormView extends BaseView{
 				<h2><?php echo $model->EventInfo->Name; ?> Registration</h2>
 				<div class="wrap" id="RegistrationForm">
 					<?php echo $model->FormInfo->FormEmbedCode; ?>
-					<a href='<?php echo $_SERVER['REQUEST_URI'].'/?a=completed&eid=9999';?>'>click here to simulate completing the form</a>
+					<a href='<?php echo $_SERVER['REQUEST_URI'].'?a=completed&eid=9999';?>'>click here to simulate completing the form</a>
 				</div>			
 			</div><!-- #content -->
 		</div><!-- #primary -->
