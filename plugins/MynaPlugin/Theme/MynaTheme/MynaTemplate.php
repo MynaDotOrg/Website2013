@@ -121,13 +121,11 @@ get_header(); ?>
 		
 		<!-- Begin Main Container -->
 		<div class="container_wrap fullsize" id="main">	
-
 			<div class="container">
 				<?php 
 					$controller->Actions();
 				?>
 			</div>
-		
 		</div>
 		<!-- End Main Container -->	
 			

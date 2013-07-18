@@ -199,6 +199,37 @@ class SqlDataLayer{
 		} 
 	}
 	
+	public function SaveRegistrationFormEntry($registrationId, $entryId, $userID){
+		$previousRegistration = $this->wpdbservice->get_row(
+				$this->wpdbservice->prepare(
+					"select * from Myna_RegistrationsToUsers where RegistrationID = %d and UserID = %d"
+					,$registrationId,$userID)
+				);
+		if(NULL == $previousRegistration){
+			$result = $this->wpdbservice->insert(
+					'Myna_RegistrationsToUsers',
+					array(
+							'RegistrationID'=>$registrationId,
+							'UserID'=> $userID,
+							'EntryID'=>$entryId
+					),
+					array('%d','%d','%d')
+			);
+		}else{
+			$result = $this->wpdbservice->update(
+					'Myna_RegistrationsToUsers',
+					array(
+							'EntryID'=>$entryId
+					),
+					array( 
+							'RegistrationID'=>$registrationId,
+							'UserID'=> $userID, ),
+					array( '%d' ),
+					array( '%d' )
+			);
+		}
+	}
+	
 }
 
 ?>

@@ -18,11 +18,16 @@ class RegistrationController extends BaseController{
 		}
 
 		if(false == Utility::endswith($currentUrl,'/registration/') && $action == 'view'){
-			$registrationId = $this->GetIDFromUrl($currentUrl);
+			$registrationId = $this->GetIDFromUrl();
 			$this->GetRegistrationForm($registrationId);
 		}
+		else if(false == Utility::endswith($currentUrl,'/registration/') && $action == 'complete'){
+			$registrationId = $this->GetIDFromUrl();
+			$entryID = $this->GetFormEntryIDFromUrl();
+			$this->GetRegistrationFormCompleted($registrationId,$entryID);
+		}
 		else if(false == Utility::endswith($currentUrl,'/registration/') && $action == 'edit'){
-			$registrationId = $this->GetIDFromUrl($currentUrl);
+			$registrationId = $this->GetIDFromUrl();
 			$this->EditEventInfo($registrationId);
 		}
 		else if(false == Utility::endswith($currentURl, '/registration/')&& $action == 'new'){
@@ -46,13 +51,36 @@ class RegistrationController extends BaseController{
 		$view->GetView($model);
 	}
 	
-	function GetIDFromUrl($url){
-		preg_match_all('^\d+^',$url,$matches,PREG_PATTERN_ORDER);
+	public function GetRegistrationFormCompleted($registrationId, $entryId){
+		$view = new RegistrationCompletedView();
+		$model = new RegistrationFormModel();
+		
+		$userID = $this->usrService->GetCurrentUserID();
+		
+		$model->EventInfo = $this->sqldatalayer->GetRegistrationEventInfo($registrationId);
+		$this->sqldatalayer->SaveRegistrationFormEntry($registrationId, $entryId, $userID);
+		
+		$view->GetView($model);
+	}
+	
+	function GetIDFromUrl(){
+		$pos = strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']);
+		$asd = substr($_SERVER['REQUEST_URI'], 0, $pos - 2);
+		$asd = substr($asd, strlen($_SERVER['SCRIPT_NAME']) + 1);
+		preg_match_all('^\d+^',$asd,$matches,PREG_PATTERN_ORDER);
 		$arraylen = count($matches[0]);
 		if(0 < $arraylen){
 			return intval($matches[0][$arraylen-1]);
 		}
 		return -1;
+	}
+	
+	function GetFormEntryIDFromUrl(){
+		$entryId = 0;
+		if(isset($_REQUEST['eid']) && false == empty($_REQUEST['eid'])){
+			$entryId = intval($_REQUEST['eid']);
+		}
+		return $entryId;
 	}
 }
 

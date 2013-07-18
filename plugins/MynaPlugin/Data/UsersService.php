@@ -91,6 +91,11 @@ class UsersService{
 		$current_user = wp_get_current_user();
 		$type = $this->sqldatalayer->GetUserType($current_user->ID);
 	}
+	
+	public function GetCurrentUserID(){
+		$current_user = wp_get_current_user();
+		return $current_user->ID;
+	}
 }
 
 
