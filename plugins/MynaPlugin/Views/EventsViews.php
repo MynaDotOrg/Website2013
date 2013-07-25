@@ -141,7 +141,7 @@ class EventsEditView extends BaseView{
 			<div id="primary" class="site-content">
 				<div id="content" role="main">
 					<div class="wrap">
-						<form method='post'
+						<form method='post' data-validate="parsley" id='editEventForm'
 							<?php echo 'action=\''.$_SERVER['REQUEST_URI'].'\'';?>
 						>
 							<div id="EventInfo">
@@ -153,7 +153,7 @@ class EventsEditView extends BaseView{
 								</div>								
 								<div class='editsection'>
 									<h3>Name:</h3>
-									<input type='text' name='eventName' value='<?php echo $model->Info->Name; ?>' >
+									<input type='text' name='eventName' placeholder='Name' data-required="true" value='<?php echo $model->Info->Name; ?>' >
 								</div>
 								<div class='editsection'>
 									<select id="eventTypeDropDown">
@@ -172,28 +172,28 @@ class EventsEditView extends BaseView{
 									<div style="float:left;">
 										<h3>Date</h3>
 										<div class='EventDates'>
-											<input type="text" class="datePickerClass" id="EventDatePicker" name="EventDates" value='<?php echo $model->Info->EventDate; ?>' />
+											<input type="text" class="datePickerClass" id="EventDatePicker" placeholder='Select Date' data-required="true" name="EventDates" value='<?php echo $model->Info->EventDate; ?>' />
 										</div>
 									</div>
 									<div style="float:left; padding-left:30px;">
 										<h3>Time</h3>
 										<div class='EventDates'>
-											<?php $this->GetTimePicker("EventDatePickerTime", $model->Info->Time);?>
+											<?php $this->GetTimePicker("EventDatePickerTime", $model->Info->Time, true);?>
 										</div>
 									</div>
 								</div>
 								<div class='editsection'>
 									<h3>Location:</h3>
-									<input type='text' name='EventLocationAddress' style='width:200px' value='<?php echo $model->Info->LocationAddress; ?>'/><br/>
-									<input type='text' name='EventLocationAddress2' style='width:200px' value='<?php echo $model->Info->LocationAddress2; ?>'/><br/>
-									<input type='text' name='EventLocationCity' style='width:150px' value='<?php echo $model->Info->LocationCity; ?>'/>
+									<input type='text' name='EventLocationAddress' style='width:200px' placeholder='Address' value='<?php echo $model->Info->LocationAddress; ?>'/><br/>
+									<input type='text' name='EventLocationAddress2' style='width:200px' placeholder='Address2' value='<?php echo $model->Info->LocationAddress2; ?>'/><br/>
+									<input type='text' name='EventLocationCity' style='width:150px' placeholder='City' value='<?php echo $model->Info->LocationCity; ?>'/>
 									<?php $this->GetStatesDropdown('EventLocationState', $model->Info->LocationState);?>
 									<br/>
-									<input type='text' name='EventLocationZip' style='width:200px' value='<?php echo $model->Info->LocationZip; ?>'/>
+									<input type='text' name='EventLocationZip' style='width:200px' placeholder='Zip' value='<?php echo $model->Info->LocationZip; ?>'/>
 								</div>
 							</div>
 							
-							<input type="submit" value="Save" /><input type="button" value="Cancel" />
+							<input type="submit" value="Save" id='btnSave' /><input type="button" value="Cancel" />
 						</form>
 					</div>
 				</div><!-- #content -->
@@ -209,8 +209,13 @@ class EventsEditView extends BaseView{
 					//bind description editor value
 					jQuery("#eventTypeDropDown").val('<?php echo $model->Info->EventTypeID;?>');
 					jQuery(".datePickerClass").datepicker( "option", "dateFormat", "mm/dd/yy" );
+					$('#btnSave').click(viewmodel.Valdate);
 				};
 				viewmodel.Init();
+
+				viewmodel.Valdate = function(){
+				    $('#editEventForm').parsley( 'validate' );
+				}
 				
 			</script>
 		<?php

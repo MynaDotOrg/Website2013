@@ -79,9 +79,11 @@ class BaseView{
 		<?php 
 	}
 	
-	function GetTimePicker($controlName, $selectedValue){
+	function GetTimePicker($controlName, $selectedValue, $required){
 		?>
-			<select
+			<select 
+			<?php if(true == $required): echo " data-required='true' "; endif?>
+			
 		<?php echo 'name=\''.$controlName.'\'' ;?>
 		>
 		<?php 
@@ -111,7 +113,7 @@ class BaseView{
 			'22'=>'10 PM',
 			'23'=>'11 PM');
 
-			echo'<option value=\'\'>Select a Time...</option>';
+			echo'<option value>Select a Time...</option>';
 				
 			foreach($times as $key=>$val){
 				if($selectedValue == $key){
