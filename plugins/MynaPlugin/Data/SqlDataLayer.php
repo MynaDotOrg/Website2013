@@ -40,6 +40,9 @@ class SqlDataLayer{
 	}
 	
 	public function SaveEventInfo($eventID, $eventInfo){
+		
+		$eventDate = GetSqlDateString($eventInfo->EventDates,$eventInfo->EventDatePickerTime);
+		
 		return $this->wpdbservice->update(
 			'Myna_Events',
 			array(
@@ -49,7 +52,8 @@ class SqlDataLayer{
 			'LocationAddress2' => $eventInfo->EventLocationAddress2,
 			'LocationCity' => $eventInfo->EventLocationCity,
 			'LocationState' => $eventInfo->EventLocationState,
-			'LocationZip' => $eventInfo->EventLocationZip
+			'LocationZip' => $eventInfo->EventLocationZip,
+			'EventDate'=>$eventDate
 			),
 			array( 'EventID' => $eventID ),
 			null,
@@ -199,6 +203,20 @@ class SqlDataLayer{
 		} 
 	}
 	
+	public function GetRegistrationIDFromEvent($eventId, $userTypeId){
+		$registration = $this->wpdbservice->get_row(
+				$this->wpdbservice->prepare(
+						"select RegistrationID from Myna_Registrations where EventID = %d and UserTypeID = %d"
+						,$eventId,$userTypeId)
+		);
+		if(NULL != $registration){
+			return $registration->RegistrationID;		
+		}
+		else{
+			return null;
+		}
+	}
+	
 	public function SaveRegistrationFormEntry($registrationId, $entryId, $userID){
 		$previousRegistration = $this->wpdbservice->get_row(
 				$this->wpdbservice->prepare(
@@ -228,6 +246,50 @@ class SqlDataLayer{
 					array( '%d' )
 			);
 		}
+	}
+	
+	public function SaveRegistrationInfo($registrationId, $registrationInfo){
+		
+		$eventDate = GetSqlDateString($registrationInfo->RegistrationExpiresDate,$registrationInfo->RegistrationExpiresTime);
+		
+		$previousRegistration = $this->wpdbservice->get_row(
+				$this->wpdbservice->prepare(
+						"select * from Myna_Registrations where RegistrationID = %d"
+						,$registrationId)
+		);
+		if(NULL != $previousRegistration){
+			$result = $this->wpdbservice->update(
+					'Myna_Registrations',
+					array(
+							'UserTypeID'=>$registrationInfo->UserType,
+							'ExpiresOn'=>$eventDate,
+							'FormEmbedCode'=>$registrationInfo->EmbedCode
+					),
+					array( 'RegistrationID'=>$registrationId),
+					array( '%d' ),
+					array( '%d' )
+			);
+		}
+	}
+	
+	public function CreateRegistrationInfo($eventId, $registrationInfo){
+		$previousRegistration = $this->wpdbservice->get_row(
+				$this->wpdbservice->prepare(
+						"select * from Myna_Registrations where RegistrationID = %d"
+						,$registrationId,$userID)
+		);
+	}
+						
+						
+	private function GetSqlDateString($date, $time){
+		//desired format: YYYY-MM-DD HH:MM:SS
+		//$date format: mm/dd/yyyy
+		//$time format: 0 = midnight, 12 = noon, 13 = 1 pm
+		list($mm,$dd,$yyyy) = explode('/',$date);
+		if (!checkdate($mm,$dd,$yyyy)) {
+		    	return -1;
+		}
+		return $yyyy.'-'.$mm.'-'.$dd.' '.$time.':00:00';
 	}
 	
 }

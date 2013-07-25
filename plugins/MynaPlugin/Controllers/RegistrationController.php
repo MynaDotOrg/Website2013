@@ -27,11 +27,12 @@ class RegistrationController extends BaseController{
 			$this->GetRegistrationFormCompleted($registrationId,$entryID);
 		}
 		else if(false == Utility::endswith($currentUrl,'/registration/') && $action == 'edit'){
-			$registrationId = $this->GetIDFromUrl();
-			$this->EditEventInfo($registrationId);
+			$event = $this->GetIDFromUrl();
+			$this->CreateAndEditRegistration();
 		}
 		else if(false == Utility::endswith($currentURl, '/registration/')&& $action == 'new'){
-			$this->NewEventInfo();
+			$event = $this->GetIDFromUrl();
+			$this->CreateAndEditRegistration();
 		}
 		else{
 			//default
@@ -63,10 +64,56 @@ class RegistrationController extends BaseController{
 		$view->GetView($model);
 	}
 	
+	public function CreateRegistration($eventID){
+		$view = new RegistrationEditView();
+		$model = new RegistrationInfoModel();
+		
+		$model->EventInfo = $this->sqldatalayer->GetEventInfo($eventID);
+		
+		if(true == $this->RequestIsPost()){
+			$regInfo = $this->populateWithPost();
+			$successfullySaved = $this->sqldatalayer->CreateRegistrationInfo($eventId, $regInfo);
+			if(true == $successfullySaved){
+				$this->redirect('/events/'.$eventId);
+			}else{
+				$view->ViewBag["ErrorSavingInfo"] = true;
+			}
+		}
+		
+		$view->ViewBag["UserTypes"] = array(UserType::Camper=>"Camper",UserType::Counselor=>"Counselor",UserType::Advisor=>"Advisor");
+		$view->GetView($model);
+	}
+	
+	public function EditRegistration($registrationId){
+		$view = new RegistrationEditView();
+		$model = new RegistrationInfoModel();
+		
+		$model->EventInfo = $this->sqldatalayer->GetRegistrationEventInfo($registrationId);
+		
+		if(true == $this->RequestIsPost()){
+			$regInfo = $this->populateWithPost();
+			$successfullySaved = $this->sqldatalayer->SaveRegistrationInfo($eventId, $eventInfo);
+			if(true == $successfullySaved){
+				$this->redirect('/events/'.$eventId);
+			}else{
+				$view->ViewBag["ErrorSavingInfo"] = true;
+			}
+		}
+		
+		$view->ViewBag["UserTypes"] = array(UserType::Camper=>"Camper",UserType::Counselor=>"Counselor",UserType::Advisor=>"Advisor");
+		$view->GetView($model);
+	}
+	
 	function GetIDFromUrl(){
 		$pos = strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']);
-		$asd = substr($_SERVER['REQUEST_URI'], 0, $pos - 2);
-		$asd = substr($asd, strlen($_SERVER['SCRIPT_NAME']) + 1);
+		if(NULL == $pos){
+			$asd = $_SERVER['REQUEST_URI'];
+		}
+		else{
+			$asd = substr($_SERVER['REQUEST_URI'], 0, $pos - 2);
+			$asd = substr($asd, strlen($_SERVER['SCRIPT_NAME']) + 1);
+		}
+		
 		preg_match_all('^\d+^',$asd,$matches,PREG_PATTERN_ORDER);
 		$arraylen = count($matches[0]);
 		if(0 < $arraylen){

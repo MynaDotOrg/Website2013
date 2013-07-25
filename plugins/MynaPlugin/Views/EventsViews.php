@@ -87,39 +87,42 @@ class EventInfoView extends BaseView{
 							<h2>
 							<?php echo $model->Info->Name; ?>
 							</h2>
-							<div class='infosection'>
-								<table style="width:400px;">
-									<tr>
-										<td>
-											<span style="width:200px;">
-												<h3>Location</h3>
-												<?php echo $model->Info->LocationAddress; ?><br/>
-												<?php echo $model->Info->LocationCity; ?>,
-												<?php echo $model->Info->LocationState; ?><br/>
-												<?php echo $model->Info->LocationZip; ?>
-											</span>
-										</td>
-										<td>
-											<span style="width:200px;">
-												<h3>Dates</h3>
-												<ol id="EventDatesList">
-													<?php
-													foreach ( $model->EventDates as $eventdate ) 
-													{
-														$dt = new DateTime($eventdate->StartDateTime);
-														echo '<li>'.$eventdate->DateName.'<br/>'.$dt->format('F d, Y H:i A').'</li>';
-													}
-													?>
-												</ol>
-											</span>
-										</td>
-									</tr>
-								</table>
+							<div class='eventlistitemRow'>
+								<div class="eventlistitemColumn" style="margin-right:40px">
+									<span style="width:200px;">
+										<h3>Location</h3>
+										<?php echo $model->Info->LocationAddress; ?><br/>
+										<?php echo $model->Info->LocationCity; ?>,
+										<?php echo $model->Info->LocationState; ?><br/>
+										<?php echo $model->Info->LocationZip; ?>
+									</span>
+								</div>
+								<div class="eventlistitemColumn" >
+									<span style="width:200px;">
+									<h3>Dates</h3>
+									<ol id="EventDatesList">
+										<?php
+										foreach ( $model->EventDates as $eventdate ) 
+										{
+											$dt = new DateTime($eventdate->StartDateTime);
+											echo '<li>'.$eventdate->DateName.'<br/>'.$dt->format('F d, Y H:i A').'</li>';
+										}
+										?>
+									</ol>
+									</span>
+								</div>
 							</div>
-							<div class='infosection'>
+							<div class='eventlistitemRow'>
 							<?php echo $model->Info->Description; ?>	
 							</div>
-							<input type="button" value="Register" />
+							<?php 
+								if(NULL != $model->Registration){
+									echo "<a href='http://".$_SERVER['SERVER_NAME']."/registration/".$model->Registration."' >Register</a>";
+								}
+								else{
+									echo "<a href='http://".$_SERVER['SERVER_NAME']."/registration/?e=".$model->Info->EventID."' >Register</a>";
+								} 
+							?>
 						</div>
 					</div><!-- #content -->
 			</div><!-- #primary -->
@@ -205,7 +208,7 @@ class EventsEditView extends BaseView{
 					//bind states dropdown value
 					//bind description editor value
 					jQuery("#eventTypeDropDown").val('<?php echo $model->Info->EventTypeID;?>');
-					jQuery(".datePickerClass").datepicker();
+					jQuery(".datePickerClass").datepicker( "option", "dateFormat", "mm/dd/yy" );
 				};
 				viewmodel.Init();
 				

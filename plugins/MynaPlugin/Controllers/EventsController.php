@@ -67,6 +67,15 @@ class EventsController extends BaseController{
 		$model = new EventInfoModel();
 		$model->Info = $this->sqldatalayer->GetEventInfo($eventId);
 		$model->EventDates = $this->sqldatalayer->GetEventDates($eventId);
+		
+		$model->Registration = null;
+		if($this->usrService->UserIs(UserType::Counselor)){
+			$model->Registration = $this->sqldatalayer->GetRegistrationIDFromEvent($eventId, UserType::Counselor);
+		}
+		elseif ($this->usrService->UserIs(UserType::Camper)){
+			$model->Registration = $this->sqldatalayer->GetRegistrationIDFromEvent($eventId, UserType::Camper);
+		}
+		
 		$view->GetView($model);
 	}
 	

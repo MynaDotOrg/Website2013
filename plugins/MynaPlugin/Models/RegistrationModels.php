@@ -13,4 +13,10 @@ class RegistrationUserListModel{
 	public $Registrants;
 }
 
+class RegistrationInfoModel{
+	public $UserType;
+	public $EmbedCode;
+	public $ExpiresOn;
+}
+
 ?>
