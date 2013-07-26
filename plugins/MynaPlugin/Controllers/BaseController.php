@@ -49,6 +49,26 @@ abstract class BaseController{
 		$view = new PermissionsErrorView();
 		$view->GetView($model);
 	}
+	
+	public function ValidateModel($model){
+		$requiredFields = $model->GetRequiredFields();
+		foreach ($requiredFields as $field){
+			if(false == isset($model->$field) || null == $model->$field || "" == $model->$field){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public function CreateModelFromPost($model){
+		$map = $model->GetPostMap();
+		$model = new stdclass();
+		foreach($map as $p => $m){
+			$model->$m = $eventInfoPost->$p;
+		}
+		
+		return $model;
+	}
 }
 
 
