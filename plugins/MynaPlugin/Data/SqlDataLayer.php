@@ -1,5 +1,8 @@
 <?php
 
+$root = $_SERVER["DOCUMENT_ROOT"];
+require_once($root.'/wp-content/plugins/MynaPlugin/Utility/Utility.php');
+
 class SqlDataLayer{
 	
 	private $wpdbservice;
@@ -32,7 +35,10 @@ class SqlDataLayer{
 				)
 		);
 		if(0 < count($results)){
-			return $results[0];
+			$r = $results[0];
+			$r->Date = Utility::SqlDateToDate($r->EventDate);
+			$r->Time = Utility::SqlDateToTime($r->EventDate);
+			return $r;
 		}
 		else{
 			return $results;
@@ -41,7 +47,7 @@ class SqlDataLayer{
 	
 	public function SaveEventInfo($eventID, $eventInfo){
 		
-		$eventDate = GetSqlDateString($eventInfo->EventDates,$eventInfo->EventDatePickerTime);
+		$eventDate = Utility::GetSqlDateString($eventInfo->EventDates,$eventInfo->EventDatePickerTime);
 		
 		return $this->wpdbservice->update(
 			'Myna_Events',
@@ -250,7 +256,7 @@ class SqlDataLayer{
 	
 	public function SaveRegistrationInfo($registrationId, $registrationInfo){
 		
-		$eventDate = GetSqlDateString($registrationInfo->RegistrationExpiresDate,$registrationInfo->RegistrationExpiresTime);
+		$eventDate = Utility::GetSqlDateString($registrationInfo->RegistrationExpiresDate,$registrationInfo->RegistrationExpiresTime);
 		
 		$previousRegistration = $this->wpdbservice->get_row(
 				$this->wpdbservice->prepare(
@@ -281,16 +287,7 @@ class SqlDataLayer{
 	}
 						
 						
-	private function GetSqlDateString($date, $time){
-		//desired format: YYYY-MM-DD HH:MM:SS
-		//$date format: mm/dd/yyyy
-		//$time format: 0 = midnight, 12 = noon, 13 = 1 pm
-		list($mm,$dd,$yyyy) = explode('/',$date);
-		if (!checkdate($mm,$dd,$yyyy)) {
-		    	return -1;
-		}
-		return $yyyy.'-'.$mm.'-'.$dd.' '.$time.':00:00';
-	}
+	
 	
 }
 

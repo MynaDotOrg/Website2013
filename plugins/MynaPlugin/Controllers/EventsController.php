@@ -108,12 +108,15 @@ class EventsController extends BaseController{
 			$this->SetEventTypes($view);
 			if(true == $this->RequestIsPost()){
 				$eventInfo = $this->populateWithPost();
-				$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
-				if($successfullyCreated != (-1)){
-					//$this->redirect('/events/'.$successfullyCreated);
-					$this->redirect('/events/');
-				}else{
-					$view->ViewBag["ErrorSavingInfo"] = true;
+				$eventModel = $this->CreateModelFromPost($eventInfo);
+				if(true == $this->ValidateModel($eventModel)){
+					$successfullyCreated = $this->sqldatalayer->CreateEventInfo($eventInfo);
+					if($successfullyCreated != (-1)){
+						//$this->redirect('/events/'.$successfullyCreated);
+						$this->redirect('/events/');
+					}else{
+						$view->ViewBag["ErrorSavingInfo"] = true;
+					}
 				}
 			}
 			else{
