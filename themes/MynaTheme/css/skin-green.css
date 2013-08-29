@@ -2,6 +2,22 @@
    Green Skin
 \*------------------------------------*/
 
+/* -----Myna Colors Used ---
+
+text hover:89947C
+background menu hover:DCE5D1/B1D388
+bacground widget:B1D388
+text color widget:
+*/
+
+.dark-text
+{
+	color:#292929;
+}
+.post-date
+{
+	color:#292929;
+}
 
 
 #content {
@@ -69,8 +85,8 @@ a h1:hover, a h2:hover, a h3:hover, a h4:hover, a h5:hover, a h6:hover {
 }
 
 .main_menu .menu li.current_page_item > a, .main_menu .menu li a:hover {
-	background: #e85657 url(../images/patterns/pattern-bg.png);
-	color: #fff;
+	background: #B1D388 url(../images/patterns/pattern-bg.png);
+	color: #2B2B2b;
 }
 
 .main_menu .menu ul.sub-menu {
@@ -79,7 +95,7 @@ a h1:hover, a h2:hover, a h3:hover, a h4:hover, a h5:hover, a h6:hover {
 }
 
 #top .main_menu li ul.sub-menu a:hover, #top .main_menu li ul.sub-menu li.current_page_item > a {
-	color: #e85657;
+	color: #89947C;
 }
 
 #top .main_menu .menu ul li.current_page_item > a {
@@ -123,7 +139,7 @@ a h1:hover, a h2:hover, a h3:hover, a h4:hover, a h5:hover, a h6:hover {
 }
 
 .widget-content, .widget ul, .widget-quote, .textwidget, .tagcloud {
-	background: #e85657 url(../images/patterns/pattern-bg.png);
+	background: #B1D388 url(../images/patterns/pattern-bg.png);
 }
 
 .sidebar .widget .tagcloud a {
@@ -140,7 +156,7 @@ a h1:hover, a h2:hover, a h3:hover, a h4:hover, a h5:hover, a h6:hover {
 }
 
 #search_submit_block {
-	background: #e85657 url(../images/patterns/pattern-bg.png);
+	background: #B1D388 url(../images/patterns/pattern-bg.png);
 }
 
 .post-image img:hover {

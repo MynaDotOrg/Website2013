@@ -393,7 +393,7 @@ hr { border: solid #666; border-width: 1px 0 0; clear: both; margin: 10px 0 30px
 
 #top .main_menu .menu li ul a:hover, #top .main_menu .menu li ul a.current {
 	background: none;
-	color: #c32079;
+	color: #89947C;
 }
 
 
@@ -633,13 +633,13 @@ div .no_padding_title h1{padding-right:0;}
 	height: 44px;
 	width: 60px;
 	float: right;
-	color: #eee;
+	color: #292929;
 	background: #12A4B3 url(../images/patterns/pattern-bg.png);
 	cursor: pointer;
 }
 
 #search_submit_block:hover {
-	color: #fff;
+	color: #696969;
 }
 
 .widget #searchform{
@@ -1340,11 +1340,11 @@ ul#flickr_widget, ul#twitter_update_list {
 }
 
 .sidebar .widget a {
-	color: #e1e1e1;
+	color: #292929;/*#e1e1e1;*/
 }
 
 .sidebar .widget a:hover {
-	color: #fff;
+	color:#191919; /*#fff;*/
 }
 
 .sidebar .news-headline {

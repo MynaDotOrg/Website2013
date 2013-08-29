@@ -37,8 +37,16 @@ margin: 0;
 
 .bmenu .menu-item:hover
 {
-background: #5C6E57;
+background: #B1D388 url(./images/patterns/pattern-bg.png);
 color:#fff;
+}
+.bmenu .menu-item:hover a
+{
+color:#000;
+}
+.bmenu .menu-item a
+{
+color:#292929;
 }
 #blogmenu
 {
@@ -49,5 +57,5 @@ background:#FFF;
 
 .bmenu .current-menu-item 
 {
-background: #BCD4B6;
+background: #B1D388 url(./images/patterns/pattern-bg.png);
 }
